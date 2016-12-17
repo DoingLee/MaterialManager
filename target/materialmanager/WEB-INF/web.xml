@@ -42,6 +42,7 @@
     </filter-mapping>
 
 
+    <!--Servlet不支持PUT表单，需要Spring支持-->
     <filter>
         <filter-name>httpPutFormContentFilter</filter-name>
         <filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>

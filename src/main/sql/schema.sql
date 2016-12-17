@@ -103,10 +103,18 @@ CREATE TABLE product_process(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8  COMMENT='产品生产流程表';
 
 
--- 初始化数据
-# insert into
-#   user(user_id, user_name)
-# values
-#   (1001, "张三");
+-- 更改
+
+-- 添加唯一性约束
+ALTER TABLE `material_name` ADD UNIQUE(`material_name`);
+ALTER TABLE `blender_name` ADD UNIQUE(`blender_name`);
+
+-- 修改product_material
+ALTER TABLE `product_material` ADD COLUMN `material_name_id`INT UNSIGNED NOT NULL COMMENT 'material name id';
+ALTER TABLE `product_material` ADD CONSTRAINT  FOREIGN KEY (material_name_id) REFERENCES `material_name`(material_name_id);
+
+SHOW CREATE TABLE product_material; #查看外键名称
+ALTER TABLE product_material DROP FOREIGN KEY product_material_ibfk_1; #先删除外键约束
+ALTER TABLE `product_material` DROP COLUMN `material_id`; #再删除列
 
 -- 上线V1.0

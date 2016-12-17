@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.material.login.dao.LoginDao">
+
+    <select id="getPassword" resultType="String" parameterType="long">
+        select password
+        from user
+        where account_id = #{accountId};
+    </select>
+
+    <update id="updatePassword" >
+        <!-- 返回： 1：更新成功； 0：更新失败（更新的行不存在）（由mybatis和mysql自动处理）-->
+        update
+        user
+        set password = #{newPassword}
+        where account_id = #{accountId} and password = #{oldPassword};
+    </update>
+
+</mapper>
