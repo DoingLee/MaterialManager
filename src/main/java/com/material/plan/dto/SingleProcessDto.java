@@ -8,7 +8,7 @@ import java.util.List;
 public class SingleProcessDto {
 
     private String productName;
-    private String description = "无";
+    private String description;
     private int processOrder;
     private String materialName;
     private String blenderName;
@@ -81,5 +81,17 @@ public class SingleProcessDto {
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    @Override
+    public String toString() {
+        return "SingleProcessDto{" +
+                "productName='" + productName + '\'' +
+                ", description='" + description + '\'' +
+                ", processOrder=" + processOrder +
+                ", materialName='" + materialName + '\'' +
+                ", blenderName='" + blenderName + '\'' +
+                ", weight=" + weight +
+                '}';
     }
 }

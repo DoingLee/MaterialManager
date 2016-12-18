@@ -1,6 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source name="MySQL - first@localhost" uuid="7dffcc64-561e-47a7-87e4-cd58ce0cdabe">
-    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  <data-source name="MySQL - material_manager_db@localhost" uuid="7dffcc64-561e-47a7-87e4-cd58ce0cdabe">
+    <database-info product="MySQL" version="5.7.16-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="material_manager_db"/>
+    <table name="blender_name" schema="" catalog="material_manager_db" type="TABLE">
+      <column name="blender_name_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="YmxlbmRlciBuYW1lIGlk" autoIncrement="true"/>
+      <column name="blender_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" remarks="5re35paZ572Q5ZCN5a2X"/>
+      <primary-key name="PRIMARY" columns="blender_name_id"/>
+      <exported-key name="product_process_ibfk_3" table="product_process" schema="" catalog="material_manager_db" columns="blender_name_id"/>
+      <index name="blender_name" unique="true" columns="blender_name"/>
+      <index name="blender_name_id" unique="true" columns="blender_name_id"/>
+    </table>
+    <table name="material_inventory" schema="" catalog="material_manager_db" type="TABLE">
+      <column name="material_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="bWF0ZXJpYWwgaWQ=" autoIncrement="true"/>
+      <column name="material_name_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="bWF0ZXJpYWwgbmFtZSBpZA=="/>
+      <column name="total_weight" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5Y6f5paZ5oC76LSo6YeP"/>
+      <column name="location" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" remarks="5Y6f5paZ5L2N572u"/>
+      <primary-key name="PRIMARY" columns="material_id"/>
+      <foreign-key name="material_inventory_ibfk_1" columns="material_name_id" ref-table="material_name" ref-schema="" ref-catalog="material_manager_db" ref-columns="material_name_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="location" unique="true" columns="location"/>
+      <index name="material_id" unique="true" columns="material_id"/>
+    </table>
+    <table name="material_name" schema="" catalog="material_manager_db" type="TABLE">
+      <column name="material_name_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="bWF0ZXJpYWwgbmFtZSBpZA==" autoIncrement="true"/>
+      <column name="material_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" remarks="5Y6f5paZ5ZCN5a2X"/>
+      <primary-key name="PRIMARY" columns="material_name_id"/>
+      <exported-key name="material_inventory_ibfk_1" table="material_inventory" schema="" catalog="material_manager_db" columns="material_name_id"/>
+      <exported-key name="product_process_ibfk_2" table="product_process" schema="" catalog="material_manager_db" columns="material_name_id"/>
+      <index name="material_name" unique="true" columns="material_name"/>
+      <index name="material_name_id" unique="true" columns="material_name_id"/>
+    </table>
+    <table name="order" schema="" catalog="material_manager_db" type="TABLE">
+      <column name="order_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="b3JkZXIgaWQ=" autoIncrement="true"/>
+      <column name="product_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="cHJvZHVjdCBpZA=="/>
+      <column name="count" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5Lqn5ZOB5pWw6YeP"/>
+      <column name="status" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="J3Vuc29sdmVkJw==" remarks="6K6i5Y2V54q25oCB77ya5pyq5aSE55CGdW5zb2x2ZWTjgIHmraPlnKjlpITnkIZzb2x2aW5n44CB5bey57uP5aSE55CGc29sdmVk"/>
+      <column name="client_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" remarks="6K6i5Y2V5a6i5oi35ZCN56ew"/>
+      <column name="client_tel" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" remarks="6K6i5Y2V5a6i5oi36IGU57O755S16K+d"/>
+      <primary-key name="PRIMARY" columns="order_id"/>
+      <foreign-key name="order_ibfk_1" columns="product_id" ref-table="product" ref-schema="" ref-catalog="material_manager_db" ref-columns="product_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="order_trace_ibfk_1" table="order_trace" schema="" catalog="material_manager_db" columns="order_id"/>
+      <index name="order_id" unique="true" columns="order_id"/>
+    </table>
+    <table name="order_trace" schema="" catalog="material_manager_db" type="TABLE">
+      <column name="order_trace_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="b3JkZXIgdHJhY2UgaWQ=" autoIncrement="true"/>
+      <column name="order_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="b3JkZXIgaWQ="/>
+      <column name="user_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5pON5L2c5ZGYIHVzZXIgaWQ="/>
+      <column name="action" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" remarks="5pON5L2c5Yqo5L2c"/>
+      <column name="action_time" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" remarks="5pON5L2c5pe26Ze0"/>
+      <primary-key name="PRIMARY" columns="order_trace_id"/>
+      <foreign-key name="order_trace_ibfk_1" columns="order_id" ref-table="order" ref-schema="" ref-catalog="material_manager_db" ref-columns="order_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="order_trace_ibfk_2" columns="user_id" ref-table="user" ref-schema="" ref-catalog="material_manager_db" ref-columns="user_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="order_trace_id" unique="true" columns="order_trace_id"/>
+    </table>
+    <table name="product" schema="" catalog="material_manager_db" type="TABLE">
+      <column name="product_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="cHJvZHVjdCBpZA==" autoIncrement="true"/>
+      <column name="product_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" remarks="5Lqn5ZOB5ZCN56ew"/>
+      <column name="description" sqlType="VARCHAR" precision="450" scale="0" nullable="true" jdbcType="12" def="J+aXoCc=" remarks="5Lqn5ZOB5o+P6L+w"/>
+      <primary-key name="PRIMARY" columns="product_id"/>
+      <exported-key name="order_ibfk_1" table="order" schema="" catalog="material_manager_db" columns="product_id"/>
+      <exported-key name="product_process_ibfk_1" table="product_process" schema="" catalog="material_manager_db" columns="product_id"/>
+      <index name="product_id" unique="true" columns="product_id"/>
+    </table>
+    <table name="product_process" schema="" catalog="material_manager_db" type="TABLE">
+      <column name="product_process_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="cHJvZHVjdCBwcm9jZXNzIGlk" autoIncrement="true"/>
+      <column name="product_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="cHJvZHVjdCBpZA=="/>
+      <column name="process_order" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6" remarks="5pON5L2c6aG65bqP"/>
+      <column name="material_name_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5Y6f5paZ5ZCN56ewIG1hdGVyaWFsIG5hbWUgaWQ="/>
+      <column name="blender_name_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5re35paZ572Q5ZCN56ewIGJsZW5kZXIgbmFtZSBpZA=="/>
+      <column name="weight" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5omA6ZyA5Y6f5paZ6LSo6YeP"/>
+      <primary-key name="PRIMARY" columns="product_process_id"/>
+      <foreign-key name="product_process_ibfk_1" columns="product_id" ref-table="product" ref-schema="" ref-catalog="material_manager_db" ref-columns="product_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="product_process_ibfk_2" columns="material_name_id" ref-table="material_name" ref-schema="" ref-catalog="material_manager_db" ref-columns="material_name_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="product_process_ibfk_3" columns="blender_name_id" ref-table="blender_name" ref-schema="" ref-catalog="material_manager_db" ref-columns="blender_name_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="product_process_id" unique="true" columns="product_process_id"/>
+      <index name="unique_process" unique="true" columns="product_id,process_order"/>
+    </table>
+    <table name="user" schema="" catalog="material_manager_db" type="TABLE">
+      <column name="user_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="dXNlciBpZA==" autoIncrement="true"/>
+      <column name="account_id" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5" remarks="55m75b2V5ZCN"/>
+      <column name="password" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="JzEyMzQ1Nic=" remarks="5Y+j5Luk"/>
+      <column name="user_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" remarks="5ZCN5a2X"/>
+      <column name="user_type" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12" remarks="55So5oi357G75Z6LOnJvb3TjgIF3YXJlaG91c2VfbWFuYWdlcuOAgXByb2R1Y3RfcGxhbm5lcuOAgWxpbmVfd29ya2Vy"/>
+      <primary-key name="PRIMARY" columns="user_id"/>
+      <exported-key name="order_trace_ibfk_2" table="order_trace" schema="" catalog="material_manager_db" columns="user_id"/>
+      <index name="account_id" unique="true" columns="account_id"/>
+      <index name="user_id" unique="true" columns="user_id"/>
+    </table>
   </data-source>
 </component>

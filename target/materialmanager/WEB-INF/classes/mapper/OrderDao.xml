@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.material.order.dao.OrderDao">
+
+    <!--order是关键字，所以必须加``-->
+    <insert id="insertOrder" parameterType="Order">
+        INSERT IGNORE INTO `order` (product_id, `count`, status, client_name, client_tel)
+        SELECT product_id, #{count}, #{status}, #{clientName}, #{clientTel}
+        FROM `product`
+        WHERE product_name = #{productName};
+    </insert>
+
+    <select id="getAllOrder" resultType="Order">
+        SELECT p.product_name, o.order_id, o.count, o.status, o.client_name, o.client_tel
+        FROM product AS p, `order` AS o
+        WHERE p.product_id = o.product_id;
+    </select>
+
+    <update id="updateOrderStatus">
+        UPDATE IGNORE `order`
+        SET status = #{newStatus}
+        WHERE order_id = #{orderId}
+    </update>
+
+    <select id="getUnsolvedOrder" resultType="Order">
+        SELECT p.product_name, o.order_id, o.count, o.status, o.client_name, o.client_tel
+        FROM product AS p, `order` AS o
+        WHERE p.product_id = o.product_id AND o.status = 'unsolved'
+        LIMIT 1;
+    </select>
+
+    <select id="getUnsolvedOrderProductCount" resultType="UnsolvedOrderProductCount">
+        SELECT product_name, SUM(count) AS "count"
+        FROM `order`, product
+        WHERE  `order`.status = "unsolved"
+        AND  `order`.product_id = product.product_id
+        GROUP BY order.product_id;
+    </select>
+
+</mapper>

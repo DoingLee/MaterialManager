@@ -1,7 +1,6 @@
 package com.material.plan.dao;
 
 import com.material.plan.entity.Product;
-import com.material.plan.entity.ProductMaterial;
 import com.material.plan.entity.ProductProcess;
 import org.apache.ibatis.annotations.Param;
 
@@ -28,13 +27,6 @@ public interface PlanDao {
 
     /**
      *
-     * @param productMaterial
-     * @return 成功：返回1； 重复插入：返回0
-     */
-    int addProductMaterial(ProductMaterial productMaterial);
-
-    /**
-     *
      * @param productProcess
      * @return 成功：返回1； 重复插入：返回0
      */
@@ -44,21 +36,15 @@ public interface PlanDao {
 
     int updateProduct(Product product);
 
-    int updateProductMaterial(ProductMaterial productMaterial);
-
     int updateProductProcess(ProductProcess productProcess);
 
     /***************************************删除操作**************************************/
 
     int deleteProduct(String productName);
 
-    int deleteProductMaterial(int productId);
+    int deleteProductProcess(String productName);
 
-    int deleteSingleProductMaterial(@Param("productId")int productId, @Param("processOrder")int processOrder);
-
-    int deleteProductProcess(int productId);
-
-    int deleteSingleProductProcess(@Param("productId")int productId, @Param("processOrder")int processOrder);
+    int deleteSingleProductProcess(@Param("productName")String productName, @Param("processOrder")int processOrder);
 
     /**************************************查找操作**************************************/
 
@@ -70,7 +56,5 @@ public interface PlanDao {
 
     Product getProduct(String productName);
 
-    List<ProductMaterial> getProductMaterial(int productId);
-
-    List<ProductProcess> getProductProcess(int productId);
+    List<ProductProcess> getProductProcess(String productName);
 }

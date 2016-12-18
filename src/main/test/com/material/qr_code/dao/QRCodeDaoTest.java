@@ -23,13 +23,13 @@ public class QRCodeDaoTest {
 
     @Test
     public void testAddMaterialName() throws Exception {
-        int result = qrCodeDao.addMaterialName("material");
+        int result = qrCodeDao.addMaterialName("m0");
         logger.debug("结果：" + result);
     }
 
     @Test
     public void testAddBlenderName() throws Exception {
-        int result = qrCodeDao.addBlenderName("blender");
+        int result = qrCodeDao.addBlenderName("b0");
         logger.debug("结果：" + result);
     }
 }

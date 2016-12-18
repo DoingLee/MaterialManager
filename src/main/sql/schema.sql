@@ -44,7 +44,7 @@ CREATE TABLE blender_name(
 CREATE TABLE `order`(
   `order_id` INT UNSIGNED  NOT NULL  UNIQUE  AUTO_INCREMENT  COMMENT 'order id',
   `product_id` INT UNSIGNED  NOT NULL  COMMENT 'product id',
-  `count` TINYINT UNSIGNED  NOT NULL  DEFAULT 1  COMMENT '产品数量',
+  `count` INT UNSIGNED  NOT NULL  DEFAULT 1  COMMENT '产品数量',
   `status` VARCHAR(45)  NOT NULL  DEFAULT 'unsolved'  COMMENT '订单状态：未处理unsolved、正在处理solving、已经处理solved',
   `client_name` VARCHAR(45)  NOT NULL  COMMENT '订单客户名称',
   `client_tel` VARCHAR(45)  NOT NULL  COMMENT '订单客户联系电话',
@@ -58,7 +58,7 @@ CREATE TABLE order_trace(
   `order_id` INT UNSIGNED  NOT NULL  COMMENT 'order id',
   `user_id` INT UNSIGNED  NOT NULL  COMMENT '操作员 user id',
   `action` VARCHAR(100)  NOT NULL  COMMENT '操作动作',
-  `action_time` TIMESTAMP  NOT NULL  COMMENT '操作时间',
+  `action_time` DATETIME  NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '操作时间',
 
   PRIMARY KEY (order_trace_id),
   FOREIGN KEY (order_id) REFERENCES `order`(order_id),
@@ -117,4 +117,10 @@ SHOW CREATE TABLE product_material; #查看外键名称
 ALTER TABLE product_material DROP FOREIGN KEY product_material_ibfk_1; #先删除外键约束
 ALTER TABLE `product_material` DROP COLUMN `material_id`; #再删除列
 
--- 上线V1.0
+-- 把product_material表与product_process表合并
+ALTER TABLE product_process ADD COLUMN weight INT UNSIGNED NOT NULL COMMENT '所需原料质量';
+
+-- 添加多列UNIQUE约束，防止重复步骤
+ALTER TABLE product_process ADD CONSTRAINT unique_process UNIQUE (product_id, process_order);
+
+

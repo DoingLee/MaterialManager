@@ -18,21 +18,14 @@
         VALUES (#{productName}, #{description})
     </insert>
 
-    <insert id="addProductMaterial" parameterType="ProductMaterial">
-        INSERT IGNORE INTO product_material(material_name_id, product_id, weight)
-        SELECT material_name_id, #{productId}, #{weight}
-        FROM material_name
-        WHERE material_name = #{materialName};
-    </insert>
-
     <insert id="addProductProcess" parameterType="ProductProcess">
-        INSERT IGNORE INTO product_process(product_id, process_order, material_name_id, blender_name_id)
-        SELECT #{productId}, #{processOrder}, material_name_id, blender_name_id
-        FROM material_name , product_name
-        WHERE material_name = #{materialName}) and blender_name = #{blenderName};
+        INSERT IGNORE INTO `product_process` (product_id, process_order, material_name_id, blender_name_id, weight)
+        SELECT product.product_id , #{processOrder}, material_name.material_name_id, blender_name.blender_name_id, #{weight}
+        FROM product, material_name , blender_name
+        WHERE material_name.material_name = #{materialName}
+        AND blender_name.blender_name = #{blenderName}
+        AND product.product_name = #{productName};
     </insert>
-
-
 
 
     <update id="updateProduct" parameterType = "Product">
@@ -41,21 +34,15 @@
         WHERE product_name = #{productName};
     </update>
 
-    <update id="updateProductMaterial" parameterType = "ProductMaterial">
-        UPDATE IGNORE `product_material`
-        SET  material_name_id = (SELECT material_name_id FROM material_name WHERE material_name = #{materialName}),
-        weight = #{weight}
-        WHERE product_id = #{productId};
-    </update>
-
     <update id="updateProductProcess" parameterType = "ProductProcess">
         UPDATE IGNORE `product_process`
         SET
         material_name_id = (SELECT material_name_id FROM material_name WHERE material_name = #{materialName}),
         blender_name_id = (SELECT blender_name_id FROM blender_name WHERE blender_name = #{blenderName}),
-        WHERE product_id = #{productId} and process_order = #{processOrder} ;
+        weight = #{weight}
+        WHERE product_id = ( SELECT product_id FROM product WHERE product_name = #{productName})
+        AND process_order = #{processOrder} ;
     </update>
-
 
 
     <delete id="deleteProduct">
@@ -63,29 +50,14 @@
         WHERE product_name = #{productName};
     </delete>
 
-    <delete id="deleteProductMaterial">
-        DELETE IGNORE FROM product_material
-        WHERE product_id = #{productId};
-    </delete>
-
-    <delete id="deleteSingleProductMaterial">
-        DELETE IGNORE FROM product_material
-        WHERE product_id = #{productId}
-        AND material_name_id = (
-        SELECT material_name
-        FROM product_process
-        WHERE process_order = #{processOrder}
-        AND product_id = #{productId});
-    </delete>
-
     <delete id="deleteProductProcess">
         DELETE IGNORE FROM product_process
-        WHERE product_id = #{productId};
+        WHERE product_id = ( SELECT product_id FROM product WHERE product_name = #{productName} );
     </delete>
 
     <delete id="deleteSingleProductProcess">
         DELETE IGNORE FROM product_process
-        WHERE product_id = #{productId}
+        WHERE product_id = ( SELECT product_id FROM product WHERE product_name = #{productName})
         AND process_order = #{processOrder};
     </delete>
 
@@ -102,19 +74,13 @@
         WHERE product_name = #{productName};
     </select>
 
-    <select id="getProductMaterial" resultType="ProductMaterial">
-        SELECT product_material.product_id, material_name.material_name, product_material.weight
-        FROM product_material, material_name
-        WHERE product_material.material_name_id = material_name.material_name_id
-        and product_material.product_id = #{productId};
-    </select>
-
     <select id="getProductProcess" resultType="ProductProcess">
-        SELECT product_process.product_id, product_process.process_order, material_name.material_name, blender_name.blender_name
+        SELECT product_process.product_id, product_process.process_order, product_process.weight,
+        material_name.material_name, blender_name.blender_name
         FROM product_process, material_name,blender_name
         WHERE product_process.material_name_id = material_name.material_name_id
-        and product_process.blender_name_id = blender_name.blender_name_id
-        and product_process.product_id = #{productId};
+        AND product_process.blender_name_id = blender_name.blender_name_id
+        AND product_process.product_id = ( SELECT product_id FROM product WHERE product_name = #{productName} );
     </select>
 
 </mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.material.order_track.dao.OrderTrackDao">
+
+    <insert id="addOrderTrack" parameterType="OrderTrackMsg">
+        INSERT IGNORE INTO order_trace (order_id, user_id, action)
+        SELECT #{orderId}, user_id, #{action}
+        FROM user
+        WHERE user_name = #{userName}
+    </insert>
+
+    <select id="getOrderTrack" resultType="OrderTrackMsg">
+        SELECT order_trace.order_id, order_trace.action, order_trace.action_time, user.user_name
+        FROM order_trace, user
+        WHERE order_trace.user_id = user.user_id
+        AND order_trace.order_id = #{orderId};
+    </select>
+
+</mapper>

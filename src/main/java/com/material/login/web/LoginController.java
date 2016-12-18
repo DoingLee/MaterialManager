@@ -27,7 +27,8 @@ public class LoginController {
             method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    Result<String> login(@PathVariable("accountId") long accountId, @RequestParam("password") String password,
+    Result<String> login(@PathVariable("accountId") long accountId,
+                         @RequestParam("password") String password,
                          HttpServletResponse httpServletResponse) {
 
         boolean isSuccess = loginService.checkPassword(accountId, password);

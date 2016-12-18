@@ -1,30 +1,34 @@
 package com.material.plan.entity;
 
+import org.apache.ibatis.annotations.Param;
+
 /**
  * Created by Doing on 2016/12/17 0017.
  */
 public class ProductProcess {
-    private int productId;
+    private String productName;
     private int processOrder;
-    private String materialName;
     private String blenderName;
+    private String materialName;
+    private int weight;
 
     public ProductProcess() {
     }
 
-    public ProductProcess(int productId, int processOrder, String materialName, String blenderName) {
-        this.productId = productId;
+    public ProductProcess(String productName, int processOrder, String blenderName, String materialName, int weight) {
+        this.productName = productName;
         this.processOrder = processOrder;
-        this.materialName = materialName;
         this.blenderName = blenderName;
+        this.materialName = materialName;
+        this.weight = weight;
     }
 
-    public int getProductId() {
-        return productId;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public int getProcessOrder() {
@@ -35,14 +39,6 @@ public class ProductProcess {
         this.processOrder = processOrder;
     }
 
-    public String getMaterialName() {
-        return materialName;
-    }
-
-    public void setMaterialName(String materialName) {
-        this.materialName = materialName;
-    }
-
     public String getBlenderName() {
         return blenderName;
     }
@@ -51,13 +47,30 @@ public class ProductProcess {
         this.blenderName = blenderName;
     }
 
+    public String getMaterialName() {
+        return materialName;
+    }
+
+    public void setMaterialName(String materialName) {
+        this.materialName = materialName;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
     @Override
     public String toString() {
         return "ProductProcess{" +
-                "productId=" + productId +
+                "productName='" + productName + '\'' +
                 ", processOrder=" + processOrder +
-                ", materialName='" + materialName + '\'' +
                 ", blenderName='" + blenderName + '\'' +
+                ", materialName='" + materialName + '\'' +
+                ", weight=" + weight +
                 '}';
     }
 }

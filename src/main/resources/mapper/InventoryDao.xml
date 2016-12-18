@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.material.inventory.dao.InventoryDao">
+
+    <insert id="addInventoryMaterial" parameterType="InventoryMaterial">
+        INSERT IGNORE INTO material_inventory (material_name_id, total_weight, location)
+        SELECT material_name_id, #{totalWeight}, #{location}
+        FROM material_name
+        WHERE material_name = #{materialName};
+    </insert>
+
+    <update id="updateInventoryMaterial" parameterType="InventoryMaterial">
+        UPDATE IGNORE material_inventory
+        SET
+        total_weight = #{totalWeight},
+        location = #{location}
+        WHERE
+        material_name_id = (SELECT material_name_id FROM material_name WHERE material_name = #{materialName})
+    </update>
+
+    <select id="getInventoryMaterial" resultType="InventoryMaterial">
+        SELECT total_weight, location
+        FROM material_inventory
+        WHERE
+        material_name_id = (SELECT material_name_id FROM material_name WHERE material_name = #{materialName})
+    </select>
+
+    <delete id="deleteInventoryMaterial">
+        DELETE IGNORE FROM material_inventory
+        WHERE
+        material_name_id = (SELECT material_name_id FROM material_name WHERE material_name = #{materialName})
+    </delete>
+
+</mapper>
