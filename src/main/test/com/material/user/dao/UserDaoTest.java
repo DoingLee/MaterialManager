@@ -29,20 +29,20 @@ public class UserDaoTest {
 
     @Test
     public void testAddUser() {
-        User user = new User(13333333, "1234", "张三", Constants.USER_TYPE_ROOT);
+        User user = new User(11115, "1234", "张三", Constants.USER_TYPE_ROOT);
         int result =  userDao.addUser(user);
         logger.debug("添加结果：" + result);
     }
 
     @Test
     public void testDeleteUser()  {
-        int result = userDao.deleteUser(13333333);
+        int result = userDao.deleteUser(11115);
         logger.debug("删除结果：" + result);
     }
 
     @Test
     public void testGetUser()  {
-        User user = userDao.getUser(13333333);
+        User user = userDao.getUser(11112);
         logger.debug("查询结果：" + user.toString());
     }
 

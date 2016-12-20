@@ -86,6 +86,7 @@
       <column name="password" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="JzEyMzQ1Nic=" remarks="5Y+j5Luk"/>
       <column name="user_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" remarks="5ZCN5a2X"/>
       <column name="user_type" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12" remarks="55So5oi357G75Z6LOnJvb3TjgIF3YXJlaG91c2VfbWFuYWdlcuOAgXByb2R1Y3RfcGxhbm5lcuOAgWxpbmVfd29ya2Vy"/>
+      <column name="isAvaliable" sqlType="TINYINT UNSIGNED" precision="3" scale="0" nullable="false" jdbcType="-6" def="MQ==" remarks="5ZGY5bel5piv5ZCm5Y+v55So"/>
       <primary-key name="PRIMARY" columns="user_id"/>
       <exported-key name="order_trace_ibfk_2" table="order_trace" schema="" catalog="material_manager_db" columns="user_id"/>
       <index name="account_id" unique="true" columns="account_id"/>

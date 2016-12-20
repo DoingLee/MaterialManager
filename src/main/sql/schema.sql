@@ -123,4 +123,5 @@ ALTER TABLE product_process ADD COLUMN weight INT UNSIGNED NOT NULL COMMENT '所
 -- 添加多列UNIQUE约束，防止重复步骤
 ALTER TABLE product_process ADD CONSTRAINT unique_process UNIQUE (product_id, process_order);
 
-
+-- user不能删除，添加isAvaliable标记，只能置为不可用0、可用1
+ALTER TABLE user ADD COLUMN isAvaliable TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '员工是否可用';

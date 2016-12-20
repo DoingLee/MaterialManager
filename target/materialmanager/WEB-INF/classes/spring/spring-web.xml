@@ -27,11 +27,18 @@
     <!--<mvc:resources location="/WEB-INF/res" mapping="/resources"/>-->
 
     <!--3:配置html 显示ViewResolver -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/html/"/>
-        <property name="suffix" value=".html"/>
+    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+        <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
+        <!--<property name="prefix" value="/WEB-INF/html/"/>-->
+        <!--<property name="suffix" value=".html"/>-->
 
+    <!--</bean>-->
+
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix"> <value>/WEB-INF/web/jsp/</value> </property>
+        <property name="suffix"> <value>.jsp</value> </property>
+        <property name="order" value="0" />
     </bean>
 
     <!--4:扫描web相关的bean -->

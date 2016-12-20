@@ -23,11 +23,11 @@ public class LoginController {
     @Autowired
     private ILoginService loginService;
 
-    @RequestMapping(value = "/{accountId}/",
+    @RequestMapping(value = "/",
             method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    Result<String> login(@PathVariable("accountId") long accountId,
+    Result<String> login(@RequestParam("accountId") long accountId,
                          @RequestParam("password") String password,
                          HttpServletResponse httpServletResponse) {
 
@@ -47,11 +47,11 @@ public class LoginController {
         }
     }
 
-    @RequestMapping(value = "/{accountId}/",
+    @RequestMapping(value = "/",
             method = RequestMethod.PUT,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    Result<String> updatePassword(@PathVariable("accountId") long accountId,
+    Result<String> updatePassword(@RequestParam("accountId") long accountId,
                                   @RequestParam("oldPassword") String oldPassword,
                                   @RequestParam("newPassword") String newPassword) {
 
