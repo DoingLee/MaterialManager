@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
  * Created by Doing on 2016/12/17 0017.
  */
 @Service
-public class QRCodeService {
+public class QRCodeService implements IQRCodeService {
 
     @Autowired
     private QRCodeDao qrCodeDao;

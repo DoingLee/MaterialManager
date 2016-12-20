@@ -7,6 +7,7 @@ import com.material.plan.entity.Product;
 import com.material.plan.entity.ProductProcess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.List;
 /**
  * Created by Doing on 2016/12/17 0017.
  */
-@Controller
+@Service
 public class PlanService implements IPlanService{
 
     @Autowired

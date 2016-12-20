@@ -3,12 +3,12 @@ package com.material.inventory.service;
 import com.material.inventory.dao.InventoryDao;
 import com.material.inventory.entity.InventoryMaterial;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Doing on 2016/12/18 0018.
  */
-@Controller
+@Service
 public class InventoryService implements IInventoryService {
 
     @Autowired

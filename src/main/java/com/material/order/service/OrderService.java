@@ -10,6 +10,7 @@ import com.material.plan.entity.ProductProcess;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -18,7 +19,7 @@ import java.util.List;
 /**
  * Created by Doing on 2016/12/18 0018.
  */
-@Controller
+@Service
 public class OrderService implements IOrderService {
 
     @Autowired
