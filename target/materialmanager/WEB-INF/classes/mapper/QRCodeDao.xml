@@ -21,4 +21,14 @@
         values (#{blenderName});
     </insert>
 
+    <select id="getAllMaterialName" resultType="string">
+        SELECT material_name
+        FROM material_name;
+    </select>
+
+    <select id="getAllBlenderName" resultType="string">
+        SELECT blender_name
+        FROM blender_name;
+    </select>
+
 </mapper>

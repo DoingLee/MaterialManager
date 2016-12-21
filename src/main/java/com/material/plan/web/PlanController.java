@@ -71,7 +71,7 @@ public class PlanController {
     @ResponseBody
     Result<String> deleteProduct(@PathVariable("productName") String productName) {
         int result = planService.deleteProduct(productName);
-        if (result == 1) {
+        if (result >  0) {
             String s = "删除成功！";
             return new Result<String>(true, s);
         }else {

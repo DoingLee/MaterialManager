@@ -47,7 +47,6 @@
                                placeholder="密码">
                     </div>
 
-
                     <div style="margin-top:10px" class="form-group">
                         <!-- Button -->
                         <div class="col-sm-12 controls">
@@ -66,7 +65,6 @@
                     </div>
 
                 </form>
-
 
             </div>
         </div>

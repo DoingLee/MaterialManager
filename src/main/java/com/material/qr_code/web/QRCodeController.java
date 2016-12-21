@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import utils.Result;
 
+import java.util.List;
+
 /**
  * Created by Doing on 2016/12/17 0017.
  */
@@ -46,6 +48,32 @@ public class QRCodeController {
         }else {
             String msg = "添加失败！";
             return new Result<String>(false, msg);
+        }
+    }
+
+    @RequestMapping(value = "/material/",
+            method = RequestMethod.GET,
+            produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    Result<List<String>> getAllMaterialName(){
+        List<String> result = qrCodeService.getAllMaterialName();
+        if (result != null){
+            return new Result<List<String>>(true, result);
+        }else {
+            return new Result<List<String>>(false, null);
+        }
+    }
+
+    @RequestMapping(value = "/blender/",
+            method = RequestMethod.GET,
+            produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    Result<List<String>> getAllBlenderName(){
+        List<String> result = qrCodeService.getAllBlenderName();
+        if (result != null){
+            return new Result<List<String>>(true, result);
+        }else {
+            return new Result<List<String>>(false, null);
         }
     }
 }

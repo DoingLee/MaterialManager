@@ -47,7 +47,6 @@
                                placeholder="密码">
                     </div>
 
-
                     <div style="margin-top:10px" class="form-group">
                         <!-- Button -->
                         <div class="col-sm-12 controls">
@@ -59,14 +58,13 @@
                         <div class="col-md-12 control">
                             <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
                                 <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
-                                    忘记密码
+                                    修改密码
                                 </a>
                             </div>
                         </div>
                     </div>
 
                 </form>
-
 
             </div>
         </div>

@@ -21,7 +21,7 @@
 
 <div id="footer-div">
     <p id="footer-msg">
-        <small style="color: cadetblue">
+        <small style="color: #FFFFFF">
             @CopyRight Doing
         </small>
     </p>

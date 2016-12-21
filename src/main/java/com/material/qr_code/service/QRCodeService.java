@@ -4,6 +4,8 @@ import com.material.qr_code.dao.QRCodeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Doing on 2016/12/17 0017.
  */
@@ -22,5 +24,15 @@ public class QRCodeService implements IQRCodeService {
 
     public int addBlenderName(String blenderName) {
         return qrCodeDao.addBlenderName(blenderName);
+    }
+
+    @Override
+    public List<String> getAllMaterialName() {
+        return qrCodeDao.getAllMaterialName();
+    }
+
+    @Override
+    public List<String> getAllBlenderName() {
+        return qrCodeDao.getAllBlenderName();
     }
 }

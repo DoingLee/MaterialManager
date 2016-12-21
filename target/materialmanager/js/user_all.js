@@ -1,5 +1,5 @@
 
-
+//加载完成就自动执行
 $(document).ready(function(){
 
     //加载用户

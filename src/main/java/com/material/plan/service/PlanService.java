@@ -70,7 +70,7 @@ public class PlanService implements IPlanService{
     public int deleteProduct(String productName) {
         int result1 = planDao.deleteProductProcess(productName);
         int result2 = planDao.deleteProduct(productName);
-        return result2;
+        return result1;
     }
 
     @Override

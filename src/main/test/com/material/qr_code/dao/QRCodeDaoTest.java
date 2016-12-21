@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -32,4 +34,17 @@ public class QRCodeDaoTest {
         int result = qrCodeDao.addBlenderName("b0");
         logger.debug("结果：" + result);
     }
+
+    @Test
+    public void testGetAllMaterialName() throws Exception {
+        List<String> result = qrCodeDao.getAllMaterialName();
+        logger.debug("结果：" + result);
+    }
+
+    @Test
+    public void testGetAllBlenderName() throws Exception {
+        List<String> result = qrCodeDao.getAllBlenderName();
+        logger.debug("结果：" + result);
+    }
+
 }

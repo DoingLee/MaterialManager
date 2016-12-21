@@ -1,0 +1,17 @@
+
+
+
+#main-div{
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 30px;
+    padding-bottom: 60px;
+}
+
+#all-panel-div{
+    padding-top: 30px;
+}
+
+.align-center-in-div{
+    text-align:center
+}
