@@ -12,6 +12,14 @@
         WHERE material_name = #{materialName};
     </insert>
 
+    <update id="addInventoryMaterialWeight" >
+        UPDATE IGNORE material_inventory
+        SET
+        total_weight = total_weight + #{weight}
+         WHERE
+         material_name_id = (SELECT material_name_id FROM material_name WHERE material_name = #{materialName})
+    </update>
+
     <update id="updateInventoryMaterial" parameterType="InventoryMaterial">
         UPDATE IGNORE material_inventory
         SET

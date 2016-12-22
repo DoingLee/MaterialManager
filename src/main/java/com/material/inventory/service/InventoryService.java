@@ -23,6 +23,12 @@ public class InventoryService implements IInventoryService {
     }
 
     @Override
+    public int addInventoryMaterialWeight(String materialName, int weight) {
+        return inventoryDao.addInventoryMaterialWeight(materialName, weight);
+    }
+
+
+    @Override
     public int updateInventoryMaterial(InventoryMaterial inventoryMaterial) {
         return inventoryDao.updateInventoryMaterial(inventoryMaterial);
     }

@@ -9,6 +9,8 @@ public interface IInventoryService {
 
     int addInventoryMaterial(InventoryMaterial inventoryMaterial);
 
+    int addInventoryMaterialWeight(String materialName, int weight);
+
     int updateInventoryMaterial(InventoryMaterial inventoryMaterial);
 
     InventoryMaterial getInventoryMaterial(String materialName);

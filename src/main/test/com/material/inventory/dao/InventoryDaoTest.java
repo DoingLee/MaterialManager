@@ -30,6 +30,12 @@ public class InventoryDaoTest {
     }
 
     @Test
+    public void testaddInventoryMaterialWeight()   {
+        int r = inventoryDao.addInventoryMaterialWeight("material1", 1000);
+        logger.debug("结果：" + r);
+    }
+
+    @Test
     public void testUpdateInventoryMaterial() throws Exception {
         InventoryMaterial inventoryMaterial = new InventoryMaterial("m0", "H柜3层", 1333);
         int r = inventoryDao.updateInventoryMaterial(inventoryMaterial);

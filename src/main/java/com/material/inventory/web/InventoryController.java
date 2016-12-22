@@ -6,10 +6,7 @@ import com.material.inventory.service.IInventoryService;
 import com.material.inventory.service.IMaterialLackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import utils.Result;
 
 import java.util.List;
@@ -26,12 +23,37 @@ public class InventoryController {
     @Autowired
     private IMaterialLackService materialLackService;
 
+    /**
+     * 添加新的原料信息
+     *
+     * @param inventoryMaterial
+     * @return
+     */
     @RequestMapping(value = "/",
             method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     Result<String> addInventoryMaterial(InventoryMaterial inventoryMaterial) {
         int result = inventoryService.addInventoryMaterial(inventoryMaterial);
+        if (result == 1) {
+            String msg = "添加成功！";
+            return new Result<String>(true, msg);
+        } else {
+            String msg = "添加失败！";
+            return new Result<String>(false, msg);
+        }
+    }
+
+    /**
+     * 添加原料质量
+     */
+    @RequestMapping(value = "/{materialName}/weight/",
+            method = RequestMethod.PUT,
+            produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    Result<String> addInventoryMaterial(@PathVariable("materialName") String materialName,
+                                        @RequestParam("weight") int weight) {
+        int result = inventoryService.addInventoryMaterialWeight(materialName, weight);
         if (result == 1) {
             String msg = "添加成功！";
             return new Result<String>(true, msg);
