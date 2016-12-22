@@ -26,11 +26,19 @@
     <h3 id="header-title">
         物料防错管理系统
     </h3>
+
+    <button type="button" class="btn btn-default" id="btn-login-out">
+        <span class="glyphicon glyphicon-log-out"></span> 退出
+    </button>
+
 </div>
 
 
 <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="/js/header_.js" type="text/javascript"></script>
+
 </body>
 
 </html>

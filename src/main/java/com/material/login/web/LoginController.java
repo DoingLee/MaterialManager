@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import utils.Result;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Created by Doing on 2016/12/17 0017.
@@ -29,21 +31,42 @@ public class LoginController {
     @ResponseBody
     Result<String> login(@RequestParam("accountId") long accountId,
                          @RequestParam("password") String password,
-                         HttpServletResponse httpServletResponse) {
+                         @RequestParam("userType") String userType,
+                         HttpServletResponse httpServletResponse,
+                         HttpServletRequest request) throws IOException {
 
-        boolean isSuccess = loginService.checkPassword(accountId, password);
-        if (isSuccess) {
-            String rawKey = accountId + "fdsgadq2gll3#!@#15!@#" + password;
-            String key = DigestUtils.md5Digest(rawKey.getBytes()).toString();
-            Cookie cookie = new Cookie("key", key);
-            cookie.setMaxAge(2592000);//30天
-            httpServletResponse.addCookie(cookie);
+        String realUserType = loginService.checkPassword(accountId, password);
+        if (realUserType == null) {
+            return new Result<String>(false, "密码错误！");
+        }
+        if (!userType.equals(realUserType)) {
+            return new Result<String>(false, "用户权限错误！");
+        }
+        if (userType.equals("line_worker")) {
+            return new Result<String>(true, "客户端登录成功！");
+        }
 
-            String msg = "登录成功！";
-            return new Result<String>(true, msg);
+        String rawKey = accountId + "fdsgadq2gll3#!@#15!@#" + password + userType;
+        String key = DigestUtils.md5Digest(rawKey.getBytes()).toString();
+        Cookie cookie = new Cookie("key", accountId + ":" + key);
+        cookie.setMaxAge(2592000);//30天
+        cookie.setPath("/");
+        httpServletResponse.addCookie(cookie);
+        String url = getRedirectPageUrl(userType, request);
+        return new Result<String>(true, url);
+    }
+
+
+    private String getRedirectPageUrl(String userType, HttpServletRequest request) {
+        String host = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+        if (userType.equals("root")) {
+            return host + "/user/page/all/";
+        } else if (userType.equals("warehouse_manager")) {
+            return host + "/order/page/check/";
+        } else if (userType.equals("product_planner")) {
+            return host + "/plan/page/check/";
         } else {
-            String msg = "登录失败！";
-            return new Result<String>(false, msg);
+            return null;
         }
     }
 

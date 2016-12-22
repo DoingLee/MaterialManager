@@ -53,7 +53,7 @@
                 <select class="form-control" id="userType" name="userType">
                     <option>root</option>
                     <option>warehouse_manager</option>
-                    <option>product_planer</option>
+                    <option>product_planner</option>
                     <option>line_worker</option>
                 </select>
             </div>

@@ -1,5 +1,6 @@
 package com.material.login.dao;
 
+import com.material.login.entity.LoginMsg;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -7,11 +8,11 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface LoginDao {
     /**
-     * 获取用户密码
+     * 获取用户信息
      * @param accountId 用户登录名
-     * @return 数据库中的用户加密密码
+     * @return 数据库中的用户加密密码、用户类型
      */
-    String getPassword(long accountId);
+    LoginMsg getUserLoginMsg(long accountId);
 
     /**
      * 更新密码

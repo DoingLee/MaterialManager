@@ -1,5 +1,6 @@
 package com.material.login.dao;
 
+import com.material.login.entity.LoginMsg;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -23,9 +24,9 @@ public class LoginDaoTest {
     LoginDao loginDao;
 
     @Test
-    public void testGetPassword() throws Exception {
-        String p = loginDao.getPassword(11112);
-        logger.debug("密码：" + p);
+    public void testGetUserLoginMsg() throws Exception {
+        LoginMsg p = loginDao.getUserLoginMsg(11112);
+        logger.debug("密码：" + p.toString());
     }
 
     @Test

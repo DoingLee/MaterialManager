@@ -25,8 +25,8 @@ public class LoginServiceTest {
 
     @Test
     public void testGetPassword() throws Exception {
-        boolean isSuccess = loginService.checkPassword(11112, "1234567");
-        logger.debug("密码：" + isSuccess);
+        String t = loginService.checkPassword(11112, "13579");
+        logger.debug("用户类型：" + t);
     }
 
 }

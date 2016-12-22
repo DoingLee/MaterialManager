@@ -47,6 +47,15 @@
                                placeholder="密码">
                     </div>
 
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-leaf"></i></span>
+                        <select class="form-control" id="userType" name="userType">
+                            <option>root</option>
+                            <option>warehouse_manager</option>
+                            <option>product_planner</option>
+                        </select>
+                    </div>
+
                     <div style="margin-top:10px" class="form-group">
                         <!-- Button -->
                         <div class="col-sm-12 controls">
@@ -79,6 +88,7 @@
 <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<script src="/js/md5.js" type="text/javascript"></script>
 <script src="/js/login.js" type="text/javascript"></script>
 
 </body>

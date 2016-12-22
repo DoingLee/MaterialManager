@@ -5,10 +5,11 @@
 
 <mapper namespace="com.material.login.dao.LoginDao">
 
-    <select id="getPassword" resultType="String" parameterType="long">
-        select password
+    <select id="getUserLoginMsg" resultType="LoginMsg" parameterType="long">
+        select account_id, password, user_type
         from user
-        where account_id = #{accountId};
+        where account_id = #{accountId}
+        AND isAvaliable = 1;
     </select>
 
     <update id="updatePassword" >
@@ -16,7 +17,9 @@
         update
         user
         set password = #{newPassword}
-        where account_id = #{accountId} and password = #{oldPassword};
+        where account_id = #{accountId}
+        AND password = #{oldPassword}
+        AND isAvaliable = 1;
     </update>
 
 </mapper>
