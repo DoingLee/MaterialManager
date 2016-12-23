@@ -32,19 +32,18 @@ public class PlannerInterceptor implements HandlerInterceptor {
                 String key = cookie.getValue();
                 String accountId = key.substring(0, key.indexOf(":"));
                 String md5Key = key.substring(key.indexOf(":") + 1);
-                UserMsgDto userMsgDto = loginService.getUserMsg(new Long("accountId"));
+                UserMsgDto userMsgDto = loginService.getUserMsg(Long.parseLong(accountId));
                 String realRawKey = accountId + "fdsgadq2gll3#!@#15!@#" + userMsgDto.getPassword() + "product_planner";
-                String realMd5key = DigestUtils.md5Digest(realRawKey.getBytes()).toString();
+                String realMd5key = DigestUtils.md5DigestAsHex(realRawKey.getBytes()).toString();
                 if (realMd5key.equals(md5Key)) {
-                    return false;
+                    return true;
                 }
             }
         }
         //重定向到登录页面
         String host = httpServletRequest.getScheme() + "://" + httpServletRequest.getServerName() + ":" + httpServletRequest.getServerPort();
         httpServletResponse.sendRedirect(host + "/login/page/");
-
-        return true;
+        return false;
     }
 
     @Override

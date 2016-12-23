@@ -1,13 +1,15 @@
 package com.material.login.web;
 
-import com.material.login.dao.LoginDao;
 import com.material.login.service.ILoginService;
-import com.material.login.service.LoginService;
-import com.material.user.entity.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.DigestUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import utils.Result;
 
 import javax.servlet.http.Cookie;
@@ -24,6 +26,8 @@ public class LoginController {
 
     @Autowired
     private ILoginService loginService;
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @RequestMapping(value = "/",
             method = RequestMethod.POST,
@@ -47,7 +51,7 @@ public class LoginController {
         }
 
         String rawKey = accountId + "fdsgadq2gll3#!@#15!@#" + password + userType;
-        String key = DigestUtils.md5Digest(rawKey.getBytes()).toString();
+        String key = DigestUtils.md5DigestAsHex(rawKey.getBytes()).toString();
         Cookie cookie = new Cookie("key", accountId + ":" + key);
         cookie.setMaxAge(2592000);//30天
         cookie.setPath("/");
