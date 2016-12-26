@@ -6,14 +6,16 @@ package com.material.login.entity;
 public class LoginMsg {
 
     private long accountId;
+    private String userName;
     private String password;
     private String userType;
 
     public LoginMsg() {
     }
 
-    public LoginMsg(long accountId, String password, String userType) {
+    public LoginMsg(long accountId, String userName, String password, String userType) {
         this.accountId = accountId;
+        this.userName = userName;
         this.password = password;
         this.userType = userType;
     }
@@ -24,6 +26,14 @@ public class LoginMsg {
 
     public void setAccountId(long accountId) {
         this.accountId = accountId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -46,6 +56,7 @@ public class LoginMsg {
     public String toString() {
         return "LoginMsg{" +
                 "accountId=" + accountId +
+                ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", userType='" + userType + '\'' +
                 '}';

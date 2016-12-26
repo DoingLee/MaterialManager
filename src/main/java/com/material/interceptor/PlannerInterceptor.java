@@ -27,16 +27,18 @@ public class PlannerInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest httpServletRequest,
                              HttpServletResponse httpServletResponse, Object o) throws Exception {
         Cookie[] cookies = httpServletRequest.getCookies();
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("key")) {
-                String key = cookie.getValue();
-                String accountId = key.substring(0, key.indexOf(":"));
-                String md5Key = key.substring(key.indexOf(":") + 1);
-                UserMsgDto userMsgDto = loginService.getUserMsg(Long.parseLong(accountId));
-                String realRawKey = accountId + "fdsgadq2gll3#!@#15!@#" + userMsgDto.getPassword() + "product_planner";
-                String realMd5key = DigestUtils.md5DigestAsHex(realRawKey.getBytes()).toString();
-                if (realMd5key.equals(md5Key)) {
-                    return true;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("key")) {
+                    String key = cookie.getValue();
+                    String accountId = key.substring(0, key.indexOf(":"));
+                    String md5Key = key.substring(key.indexOf(":") + 1);
+                    UserMsgDto userMsgDto = loginService.getUserMsg(Long.parseLong(accountId));
+                    String realRawKey = accountId + "fdsgadq2gll3#!@#15!@#" + userMsgDto.getPassword() + "product_planner";
+                    String realMd5key = DigestUtils.md5DigestAsHex(realRawKey.getBytes()).toString();
+                    if (realMd5key.equals(md5Key)) {
+                        return true;
+                    }
                 }
             }
         }

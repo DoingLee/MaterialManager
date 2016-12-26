@@ -1,6 +1,7 @@
 package com.material.login.service;
 
 import com.material.login.dao.LoginDao;
+import com.material.login.dto.LoginMsgDto;
 import com.material.login.dto.UserMsgDto;
 import com.material.login.entity.LoginMsg;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,11 @@ public class LoginService implements ILoginService {
 
 
     @Override
-    public String checkPassword (long accountId, String password){
+    public LoginMsgDto checkPassword (long accountId, String password){
         LoginMsg loginMsg = loginDao.getUserLoginMsg(accountId);
         if (loginMsg!= null && password.equals(loginMsg.getPassword())){
-            return loginMsg.getUserType();
+            LoginMsgDto loginMsgDto = new LoginMsgDto(loginMsg.getUserType(), loginMsg.getUserName());
+            return loginMsgDto;
         }else {
             return null;
         }

@@ -1,8 +1,11 @@
 package com.material.order.web;
 
+import com.material.inventory.service.IInventoryService;
 import com.material.order.dto.OrderMaterialDto;
 import com.material.order.entity.Order;
 import com.material.order.service.IOrderService;
+import com.material.plan.dto.SingleProcessDto;
+import com.material.plan.service.IPlanService;
 import com.material.user.entity.User;
 import com.material.user.service.IUserService;
 import com.sun.org.glassfish.gmbal.ParameterNames;
@@ -23,6 +26,10 @@ public class OrderController {
 
     @Autowired
     private IOrderService orderService;
+    @Autowired
+    private IPlanService planService;
+    @Autowired
+    private IInventoryService inventoryService;
 
     @RequestMapping(value = "/",
             method = RequestMethod.POST,
@@ -72,7 +79,16 @@ public class OrderController {
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     Result<Order> getUnsolvedOrder() {
+        //获取订单
         Order order = orderService.getUnsolvedOrder();
+        //更新订单状态
+        int result = orderService.updateOrderStatus(order.getOrderId(), Constants.ORDER_STATUS_SOLVING);
+        //减库存
+        List<SingleProcessDto> singleProcessDtos = planService.getProductProcess(order.getProductName());
+        for (SingleProcessDto singleProcessDto : singleProcessDtos) {
+            inventoryService.addInventoryMaterialWeight(singleProcessDto.getMaterialName(), - singleProcessDto.getWeight());
+        }
+
         if (order != null) {
             return new Result<Order>(true, order);
         }else {

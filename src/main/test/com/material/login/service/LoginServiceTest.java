@@ -1,6 +1,7 @@
 package com.material.login.service;
 
 import com.material.login.dao.LoginDao;
+import com.material.login.dto.LoginMsgDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -25,8 +26,8 @@ public class LoginServiceTest {
 
     @Test
     public void testGetPassword() throws Exception {
-        String t = loginService.checkPassword(11112, "13579");
-        logger.debug("用户类型：" + t);
+        LoginMsgDto t = loginService.checkPassword(11112, "13579");
+        logger.debug("用户类型：" + t.toString());
     }
 
 }

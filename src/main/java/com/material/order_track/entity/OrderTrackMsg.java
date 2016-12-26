@@ -59,13 +59,4 @@ public class OrderTrackMsg {
         this.actionTime = actionTime;
     }
 
-    @Override
-    public String toString() {
-        return "OrderTrackMsg{" +
-                "orderId=" + orderId +
-                ", userName='" + userName + '\'' +
-                ", action='" + action + '\'' +
-                ", actionTime='" + actionTime + '\'' +
-                '}';
-    }
 }

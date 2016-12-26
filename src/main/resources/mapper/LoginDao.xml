@@ -6,7 +6,7 @@
 <mapper namespace="com.material.login.dao.LoginDao">
 
     <select id="getUserLoginMsg" resultType="LoginMsg" parameterType="long">
-        select account_id, password, user_type
+        select account_id, password, user_type, user_name
         from user
         where account_id = #{accountId}
         AND isAvaliable = 1;

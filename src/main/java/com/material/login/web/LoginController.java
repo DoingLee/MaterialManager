@@ -1,5 +1,6 @@
 package com.material.login.web;
 
+import com.material.login.dto.LoginMsgDto;
 import com.material.login.service.ILoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,15 +40,15 @@ public class LoginController {
                          HttpServletResponse httpServletResponse,
                          HttpServletRequest request) throws IOException {
 
-        String realUserType = loginService.checkPassword(accountId, password);
-        if (realUserType == null) {
+        LoginMsgDto loginMsgDto = loginService.checkPassword(accountId, password);
+        if (loginMsgDto == null) {
             return new Result<String>(false, "密码错误！");
         }
-        if (!userType.equals(realUserType)) {
+        if (!userType.equals(loginMsgDto.getUserType())) {
             return new Result<String>(false, "用户权限错误！");
         }
         if (userType.equals("line_worker")) {
-            return new Result<String>(true, "客户端登录成功！");
+            return new Result<String>(true, loginMsgDto.getUserName());  //返回名字
         }
 
         String rawKey = accountId + "fdsgadq2gll3#!@#15!@#" + password + userType;
