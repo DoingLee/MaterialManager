@@ -53,7 +53,7 @@ public class PlanServiceTest {
 
     @Test
     public void testGetProductProcess() throws Exception {
-        List<SingleProcessDto> singleProcessDtos = planService.getProductProcess("product1");
+        List<SingleProcessDto> singleProcessDtos = planService.getProductProcess("天麻多糖润肤霜");
         for (int i = 0 ; i < singleProcessDtos.size(); i++){
             logger.debug(singleProcessDtos.get(i).toString());
         }

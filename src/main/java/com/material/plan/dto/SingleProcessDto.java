@@ -13,6 +13,7 @@ public class SingleProcessDto {
     private String materialName;
     private String blenderName;
     private int weight;
+    private String location;
 
     public SingleProcessDto() {
     }
@@ -83,6 +84,15 @@ public class SingleProcessDto {
         this.weight = weight;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+
     @Override
     public String toString() {
         return "SingleProcessDto{" +
@@ -92,6 +102,7 @@ public class SingleProcessDto {
                 ", materialName='" + materialName + '\'' +
                 ", blenderName='" + blenderName + '\'' +
                 ", weight=" + weight +
+                ", location='" + location + '\'' +
                 '}';
     }
 }

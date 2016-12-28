@@ -90,6 +90,7 @@ public class PlanService implements IPlanService{
             singleProcessDto.setMaterialName(productProcess.getMaterialName());
             singleProcessDto.setProcessOrder(productProcess.getProcessOrder());
             singleProcessDto.setWeight(productProcess.getWeight());
+            singleProcessDto.setLocation(productProcess.getLocation());
 
             singleProcessDtos.add(singleProcessDto);
         }

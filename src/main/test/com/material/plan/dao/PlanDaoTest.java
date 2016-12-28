@@ -106,7 +106,7 @@ public class PlanDaoTest {
 
     @Test
     public void testGetProductProcess() throws Exception {
-        List<ProductProcess> productProcesses = planDao.getProductProcess("product1");
+        List<ProductProcess> productProcesses = planDao.getProductProcess("天麻多糖润肤霜");
         for (int i = 0; i < productProcesses.size(); i++) {
             ProductProcess productProcess = productProcesses.get(i);
             logger.debug("结果：" + productProcess.toString());

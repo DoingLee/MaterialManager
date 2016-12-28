@@ -11,6 +11,7 @@ public class ProductProcess {
     private String blenderName;
     private String materialName;
     private int weight;
+    private String location;
 
     public ProductProcess() {
     }
@@ -63,6 +64,14 @@ public class ProductProcess {
         this.weight = weight;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     @Override
     public String toString() {
         return "ProductProcess{" +
@@ -71,6 +80,7 @@ public class ProductProcess {
                 ", blenderName='" + blenderName + '\'' +
                 ", materialName='" + materialName + '\'' +
                 ", weight=" + weight +
+                ", location='" + location + '\'' +
                 '}';
     }
 }
