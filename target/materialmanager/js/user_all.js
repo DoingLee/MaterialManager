@@ -2,19 +2,27 @@
 //加载完成就自动执行
 $(document).ready(function(){
 
+    //从cookie中获取用户类型信息
+    var userTypeString = getCookie("userType");
+
+
     //加载用户
     $.getJSON( "/user/", function( data ) {
         console.log(data);
         if (data.success == true){
             $.each( data.data, function( i, item ) {
-                $("#table-body").append(
-                "<tr> " +
-                "<td id = \"user_id_" + i + "\">" + item.accountId + "</td> " +
-                "<td>" +  item.userName + "</td> " +
-                "<td>" + item.userType + "</td>" +
-                "<td> <button type=\"button\" class=\"btn btn-danger\" id=\"btn_danger_" + i + "\">" +
-                "删除</button> </td>" +
-                " </tr>");
+                if ( userTypeString == "manager" && (item.userType == "超级管理员" || item.userType == "管理员" ) ){
+                    //不显示该行
+                }else{
+                    $("#table-body").append(
+                        "<tr> " +
+                        "<td id = \"user_id_" + i + "\">" + item.accountId + "</td> " +
+                        "<td>" +  item.userName + "</td> " +
+                        "<td>" + item.userType + "</td>" +
+                        "<td> <button type=\"button\" class=\"btn btn-danger\" id=\"btn_danger_" + i + "\">" +
+                        "删除</button> </td>" +
+                        " </tr>");
+                }
             });
         }
     });
@@ -44,5 +52,11 @@ $(document).ready(function(){
 
 });
 
+
+function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+}
 
 

@@ -38,4 +38,10 @@ public interface IOrderService {
      * @return
      */
     Order getUnsolvedOrder();
+
+    /**
+     * 获取一个产品的所有未处理订单
+     * @return
+     */
+    List<Order> getUnsolvedOrders();
 }

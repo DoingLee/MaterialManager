@@ -32,6 +32,14 @@
         LIMIT 1;
     </select>
 
+    <select id="getUnsolvedOrders" resultType="Order">
+        SELECT p.product_name, o.order_id, o.count, o.status, o.client_name, o.client_tel
+        FROM product AS p, `order` AS o
+        WHERE p.product_name = #{productName}
+        AND p.product_id = o.product_id
+        AND o.status = 'unsolved';
+    </select>
+
     <select id="getUnsolvedOrderProductCount" resultType="UnsolvedOrderProductCount">
         SELECT product_name, SUM(count) AS "count"
         FROM `order`, product

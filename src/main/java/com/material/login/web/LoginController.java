@@ -47,16 +47,36 @@ public class LoginController {
         if (!userType.equals(loginMsgDto.getUserType())) {
             return new Result<String>(false, "用户权限错误！");
         }
-        if (userType.equals("line_worker")) {
+        if (userType.equals("投料操作员") || userType.equals("取料操作员")) {
             return new Result<String>(true, loginMsgDto.getUserName());  //返回名字
         }
 
+        //添加身份认证到cookie
         String rawKey = accountId + "fdsgadq2gll3#!@#15!@#" + password + userType;
         String key = DigestUtils.md5DigestAsHex(rawKey.getBytes()).toString();
         Cookie cookie = new Cookie("key", accountId + ":" + key);
         cookie.setMaxAge(2592000);//30天
         cookie.setPath("/");
         httpServletResponse.addCookie(cookie);
+
+        //添加用户身份到cookie
+        String userTypeString;
+        if (userType.equals("管理员")) {
+            userTypeString = "manager";
+        }else if (userType.equals("超级管理员")) {
+            userTypeString = "super_manager";
+        }else if (userType.equals("产品设计员")) {
+            userTypeString = "product_planner";
+        }else if (userType.equals("仓库管理员")) {
+            userTypeString = "warehouse_manager";
+        }else {
+            userTypeString = "";
+        }
+        Cookie userTypeCookie = new Cookie("userType", userTypeString);
+        userTypeCookie.setMaxAge(2592000);//30天
+        userTypeCookie.setPath("/");
+        httpServletResponse.addCookie(userTypeCookie);
+
         String url = getRedirectPageUrl(userType, request);
         return new Result<String>(true, url);
     }
@@ -64,11 +84,11 @@ public class LoginController {
 
     private String getRedirectPageUrl(String userType, HttpServletRequest request) {
         String host = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
-        if (userType.equals("root")) {
+        if ( userType.equals("管理员") || userType.equals("超级管理员")) {
             return host + "/user/page/all/";
-        } else if (userType.equals("warehouse_manager")) {
+        } else if (userType.equals("仓库管理员")) {
             return host + "/order/page/check/";
-        } else if (userType.equals("product_planner")) {
+        } else if (userType.equals("产品设计员")) {
             return host + "/plan/page/check/";
         } else {
             return null;

@@ -25,9 +25,10 @@
 <div id="main-div">
     <%--头部--%>
     <div>
-        <ul class="nav nav-tabs" role="tablist">
+        <ul class="nav nav-tabs" role="tablist" id="tablist">
             <li role="presentation"><a href="/user/page/all/">所有用户</a></li>
             <li role="presentation" class="active"><a href="#">添加用户</a></li>
+            <li role="presentation"><a href="/order_track/page/manager/">配料流水</a></li>
         </ul>
     </div>
 
@@ -51,10 +52,10 @@
             <div class="form-group">
                 <label for="userType">用户类型</label>
                 <select class="form-control" id="userType" name="userType">
-                    <option>root</option>
-                    <option>warehouse_manager</option>
-                    <option>product_planner</option>
-                    <option>line_worker</option>
+                    <option>取料操作员</option>
+                    <option>投料操作员</option>
+                    <option>产品设计员</option>
+                    <option>仓库管理员</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-default">提交</button>

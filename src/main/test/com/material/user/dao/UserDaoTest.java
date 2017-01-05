@@ -29,7 +29,7 @@ public class UserDaoTest {
 
     @Test
     public void testAddUser() {
-        User user = new User(11115, "1234", "张三", Constants.USER_TYPE_ROOT);
+        User user = new User(11115, "1234", "张三", "管理员");
         int result =  userDao.addUser(user);
         logger.debug("添加结果：" + result);
     }
@@ -57,7 +57,7 @@ public class UserDaoTest {
 
     @Test
     public void testUpdateUser()  {
-        User user = new User(13333333, "1234", "李四", Constants.USER_TYPE_ROOT);
+        User user = new User(13333333, "1234", "李四", Constants.USER_TYPE_MANAGER);
         int result =  userDao.updateUser(user);
         logger.debug("更新结果：" + result);
     }

@@ -28,7 +28,7 @@ public class UserServiceTest {
 
     @Test
     public void testAddUser() throws Exception {
-        User user = new User(13333333, "1234", "张三", Constants.USER_TYPE_ROOT);
+        User user = new User(13333333, "1234", "张三", Constants.USER_TYPE_MANAGER);
         int result =  userService.addUser(user);
         logger.debug("添加结果：" + result);
     }
@@ -56,7 +56,7 @@ public class UserServiceTest {
 
     @Test
     public void testUpdateUser() throws Exception {
-        User user = new User(13333333, "12345", "李四", Constants.USER_TYPE_ROOT);
+        User user = new User(13333333, "12345", "李四", Constants.USER_TYPE_MANAGER);
         int result =  userService.updateUser(user);
         logger.debug("更新结果：" + result);
     }

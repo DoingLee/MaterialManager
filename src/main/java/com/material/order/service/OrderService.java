@@ -69,4 +69,14 @@ public class OrderService implements IOrderService {
     public Order getUnsolvedOrder() {
         return orderDao.getUnsolvedOrder();
     }
+
+    @Override
+    public List<Order> getUnsolvedOrders() {
+        Order order = getUnsolvedOrder();
+        if (order == null) {
+            return null;
+        }
+        List<Order> orders = orderDao.getUnsolvedOrders(order.getProductName());
+        return orders;
+    }
 }

@@ -34,9 +34,17 @@ public class PlannerInterceptor implements HandlerInterceptor {
                     String accountId = key.substring(0, key.indexOf(":"));
                     String md5Key = key.substring(key.indexOf(":") + 1);
                     UserMsgDto userMsgDto = loginService.getUserMsg(Long.parseLong(accountId));
-                    String realRawKey = accountId + "fdsgadq2gll3#!@#15!@#" + userMsgDto.getPassword() + "product_planner";
-                    String realMd5key = DigestUtils.md5DigestAsHex(realRawKey.getBytes()).toString();
-                    if (realMd5key.equals(md5Key)) {
+
+                    String realRawKey1 = accountId + "fdsgadq2gll3#!@#15!@#" + userMsgDto.getPassword() + "产品设计员";
+                    String realMd5key1 = DigestUtils.md5DigestAsHex(realRawKey1.getBytes()).toString();
+
+                    String realRawKey2 = accountId + "fdsgadq2gll3#!@#15!@#" + userMsgDto.getPassword() + "管理员";
+                    String realMd5key2 = DigestUtils.md5DigestAsHex(realRawKey2.getBytes()).toString();
+
+                    String realRawKey3 = accountId + "fdsgadq2gll3#!@#15!@#" + userMsgDto.getPassword() + "超级管理员";
+                    String realMd5key3 = DigestUtils.md5DigestAsHex(realRawKey3.getBytes()).toString();
+
+                    if (realMd5key1.equals(md5Key) || realMd5key3.equals(md5Key) || realMd5key2.equals(md5Key)) {
                         return true;
                     }
                 }

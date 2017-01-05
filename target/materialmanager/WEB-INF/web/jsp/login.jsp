@@ -50,9 +50,11 @@
                     <div style="margin-bottom: 25px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-leaf"></i></span>
                         <select class="form-control" id="userType" name="userType">
-                            <option>root</option>
-                            <option>warehouse_manager</option>
-                            <option>product_planner</option>
+                            <option>管理员</option>
+                            <option>超级管理员</option>
+                            <option>用户管理员</option>
+                            <option>产品设计员</option>
+                            <option>仓库管理员</option>
                         </select>
                     </div>
 

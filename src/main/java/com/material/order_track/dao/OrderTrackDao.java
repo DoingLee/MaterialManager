@@ -12,4 +12,5 @@ public interface OrderTrackDao {
     int addOrderTrack(OrderTrackMsg orderTrackMsg);
 
     List<OrderTrackMsg> getOrderTrack(int orderId);
+
 }

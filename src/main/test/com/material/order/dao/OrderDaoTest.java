@@ -44,7 +44,7 @@ public class OrderDaoTest {
 
     @Test
     public void testUpdateOrderStatus() throws Exception {
-        int r = orderDao.updateOrderStatus(2, Constants.ORDER_STATUS_SOLVING);
+        int r = orderDao.updateOrderStatus(2, Constants.ORDER_STATUS_COLLECTING);
         logger.debug("结果：" + r);
     }
 
@@ -53,6 +53,19 @@ public class OrderDaoTest {
         Order order = orderDao.getUnsolvedOrder();
         if (order != null) {
             logger.debug("一个未处理订单：" + order.toString());
+        } else {
+            logger.debug("没有未处理订单");
+        }
+    }
+
+    @Test
+    public void testGetUnsolvedOrders() throws Exception {
+        Order order = orderDao.getUnsolvedOrder();
+        List<Order> orders = orderDao.getUnsolvedOrders(order.getProductName());
+        if (orders != null) {
+            for (Order order1 : orders) {
+                logger.debug("多个同类未处理订单：" + order1.toString());
+            }
         } else {
             logger.debug("没有未处理订单");
         }

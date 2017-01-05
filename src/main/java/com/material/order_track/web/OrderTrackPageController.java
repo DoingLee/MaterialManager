@@ -16,7 +16,15 @@ public class OrderTrackPageController {
 
     @RequestMapping(value = "/page/",
             method = RequestMethod.GET)
-    String checkOrderTrackPage() {
+    String getOrderTrackPage() {
         return "order_track";
     }
+
+    @RequestMapping(value = "/page/manager/",
+            method = RequestMethod.GET)
+    String getOrderTrackPageforManager() {
+        return "order_track_for_manager";
+    }
+
+
 }

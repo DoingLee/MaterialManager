@@ -23,9 +23,10 @@
 <%--主体内容--%>
 <div id="main-div">
     <div>
-        <ul class="nav nav-tabs" role="tablist">
+        <ul class="nav nav-tabs" role="tablist" id="tablist">
             <li role="presentation" class="active"><a href="#">所有用户</a></li>
             <li role="presentation"><a href="/user/page/add/">添加用户</a></li>
+            <li role="presentation"><a href="/order_track/page/manager/">配料流水</a></li>
         </ul>
     </div>
 

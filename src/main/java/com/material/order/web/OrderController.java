@@ -39,9 +39,9 @@ public class OrderController {
         order.setStatus(Constants.ORDER_STATUS_UNSOLVED);
 
         List<OrderMaterialDto> orderMaterialDtos = orderService.addOrder(order);
-        if (orderMaterialDtos != null){
+        if (orderMaterialDtos != null) {
             return new Result<List<OrderMaterialDto>>(true, orderMaterialDtos);
-        }else {
+        } else {
             return new Result<List<OrderMaterialDto>>(false, null);
         }
     }
@@ -52,9 +52,9 @@ public class OrderController {
     @ResponseBody
     Result<List<Order>> getAllOrder() {
         List<Order> orders = orderService.getAllOrder();
-        if (orders != null){
+        if (orders != null) {
             return new Result<List<Order>>(true, orders);
-        }else {
+        } else {
             return new Result<List<Order>>(false, null);
         }
     }
@@ -63,37 +63,46 @@ public class OrderController {
             method = RequestMethod.PUT,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    Result<String> updateOrderStatus(@PathVariable("orderId")int orderId, @RequestParam("status")String newStatus) {
+    Result<String> updateOrderStatus(@PathVariable("orderId") int orderId, @RequestParam("status") String newStatus) {
         int result = orderService.updateOrderStatus(orderId, newStatus);
         if (result == 1) {
             String s = "更新成功";
             return new Result<String>(true, s);
-        }else {
+        } else {
             String s = "更新失败";
             return new Result<String>(false, s);
         }
     }
 
-    @RequestMapping(value = "/1/unsolved/",
+    /**
+     * 获取未处理的产品订单（合并）
+     *
+     * @return
+     */
+    @RequestMapping(value = "/unsolved/",
             method = RequestMethod.GET,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    Result<Order> getUnsolvedOrder() {
-        //获取订单
-        Order order = orderService.getUnsolvedOrder();
-        //更新订单状态
-        int result = orderService.updateOrderStatus(order.getOrderId(), Constants.ORDER_STATUS_SOLVING);
-        //减库存
-        List<SingleProcessDto> singleProcessDtos = planService.getProductProcess(order.getProductName());
-        for (SingleProcessDto singleProcessDto : singleProcessDtos) {
-            inventoryService.addInventoryMaterialWeight(singleProcessDto.getMaterialName(), - singleProcessDto.getWeight());
+    Result<List<Order>> getUnsolvedOrder() {
+        //获取一个产品的所有未处理订单
+        List<Order> orders = orderService.getUnsolvedOrders();
+        
+        if (orders == null) {
+            return new Result<List<Order>>(false, null);
         }
 
-        if (order != null) {
-            return new Result<Order>(true, order);
-        }else {
-            return new Result<Order>(false, null);
+        for (Order order : orders) {
+            //更新订单状态为正在取料
+            int result = orderService.updateOrderStatus(order.getOrderId(), Constants.ORDER_STATUS_COLLECTING);
+            //减库存
+            List<SingleProcessDto> singleProcessDtos = planService.getProductProcess(order.getProductName());
+            for (SingleProcessDto singleProcessDto : singleProcessDtos) {
+                inventoryService.addInventoryMaterialWeight(singleProcessDto.getMaterialName(), -singleProcessDto.getWeight());
+            }
         }
+
+        return new Result<List<Order>>(true, orders);
+
     }
 
 

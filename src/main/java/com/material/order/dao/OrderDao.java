@@ -39,6 +39,13 @@ public interface OrderDao {
     Order getUnsolvedOrder();
 
     /**
+     * 获取产品为入参productName的所有订单
+     * @param productName
+     * @return
+     */
+    List<Order> getUnsolvedOrders(String productName);
+
+    /**
      * 获取所有未处理的订单产品总数
      * @return
      */
