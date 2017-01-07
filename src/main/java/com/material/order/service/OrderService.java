@@ -61,7 +61,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public int updateOrderStatus(int orderId, String newStatus) {
+    public int updateOrderStatus(String orderId, String newStatus) {
         return orderDao.updateOrderStatus(orderId, newStatus);
     }
 

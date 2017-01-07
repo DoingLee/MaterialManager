@@ -30,7 +30,7 @@ public interface OrderDao {
      * @param newStatus 新状态（unsolved solving solved）
      * @return
      */
-    int updateOrderStatus(@Param("orderId")int orderId, @Param("newStatus") String newStatus);
+    int updateOrderStatus(@Param("orderId")String orderId, @Param("newStatus") String newStatus);
 
     /**
      *  获取一个未处理的订单

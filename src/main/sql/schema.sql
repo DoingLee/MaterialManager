@@ -102,6 +102,29 @@ CREATE TABLE product_process(
   FOREIGN KEY (blender_name_id) REFERENCES `blender_name`(blender_name_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8  COMMENT='产品生产流程表';
 
+-- 生产报告表
+CREATE TABLE report(
+  `report_id` INT UNSIGNED  NOT NULL  UNIQUE  AUTO_INCREMENT  COMMENT 'report id',
+  `finished_order_count` INT UNSIGNED  NOT NULL COMMENT '完成订单数',
+  `collect_count` INT UNSIGNED  NOT NULL COMMENT '完成取料单据数',
+  `single_collect_count` INT UNSIGNED  NOT NULL COMMENT '完成单个取料动作数',
+  `success_recheck_count` INT UNSIGNED  NOT NULL COMMENT '完成复核单据数',
+  `single_recheck_count` INT UNSIGNED  NOT NULL COMMENT '完成单个复核动作数',
+  `hang_up_count` INT UNSIGNED  NOT NULL COMMENT '挂单数',
+  `produce_count` INT UNSIGNED  NOT NULL COMMENT '完成投料单据数',
+  `single_produce_count` INT UNSIGNED  NOT NULL COMMENT '完成单个投料动作数',
+
+  `avg_order_time` INT UNSIGNED  NOT NULL COMMENT '平均完成订单时间（秒）',
+  `avg_collect_time` INT UNSIGNED  NOT NULL COMMENT '平均完成订单取料时间（秒）',
+  `avg_single_collect_time` INT UNSIGNED  NOT NULL COMMENT '平均完成单个取料动作时间（秒）',
+  `avg_success_recheck_time` INT UNSIGNED  NOT NULL COMMENT '平均完成订单成功复核时间（秒）',
+  `avg_single_recheck_time` INT UNSIGNED  NOT NULL COMMENT '平均完成单个复核动作时间（秒）',
+  `avg_produce_time` INT UNSIGNED  NOT NULL COMMENT '平均完成订单投料时间（秒）',
+  `avg_single_produce_time` INT UNSIGNED  NOT NULL COMMENT '平均完成单个投料动作时间（秒）',
+  `date` DATE  NOT NULL COMMENT '日期',
+  PRIMARY KEY (report_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8  COMMENT='生产报告表';
+
 
 -- 更改
 
@@ -125,3 +148,13 @@ ALTER TABLE product_process ADD CONSTRAINT unique_process UNIQUE (product_id, pr
 
 -- user不能删除，添加isAvaliable标记，只能置为不可用0、可用1
 ALTER TABLE user ADD COLUMN isAvaliable TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '员工是否可用';
+
+-- 修改自增int类型主键order_id为char(36)类型UUID
+SET FOREIGN_KEY_CHECKS = 0; -- 禁用外键约束检查
+ALTER TABLE  `order` MODIFY order_id  CHAR(36) NOT NULL  UNIQUE COMMENT 'order id'; -- 更新主键类型
+ALTER TABLE order_trace MODIFY order_id  CHAR(36) NOT NULL  COMMENT 'order id'; -- 更新外键类型
+SET FOREIGN_KEY_CHECKS = 1; -- 启用外键约束检查-- 修改自增int类型order_id为char(36)类型UUID
+
+-- 添加订单下单时间戳
+ALTER TABLE  `order` ADD COLUMN order_time DATETIME  NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '下单时间';
+

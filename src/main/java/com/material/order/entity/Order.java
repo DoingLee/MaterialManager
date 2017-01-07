@@ -10,7 +10,7 @@ public class Order {
     private String clientName;
     private String clientTel;
 
-    private int orderId;
+    private String orderId;
 
     public Order() {
     }
@@ -63,11 +63,11 @@ public class Order {
         this.clientTel = clientTel;
     }
 
-    public int getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 

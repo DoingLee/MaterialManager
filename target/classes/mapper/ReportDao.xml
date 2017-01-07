@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.material.report.dao.ReportDao">
+
+    <select id="getReport" resultType="Report">
+        select finished_order_count,
+        collect_count,
+         single_collect_count,
+         success_recheck_count,
+         hang_up_count,
+         single_recheck_count,
+         produce_count,
+         single_produce_count,
+         avg_order_time,
+         avg_collect_time,
+         avg_single_collect_time,
+         avg_success_recheck_time,
+         avg_single_recheck_time,
+         avg_produce_time,
+         avg_single_produce_time,
+         `date`
+        from report
+        WHERE `date`
+        BETWEEN #{fromDate}
+        AND #{toDate};
+    </select>
+
+    <insert id="insertRow" parameterType="Report">
+        INSERT IGNORE INTO report
+        (finished_order_count,
+        collect_count,
+         single_collect_count,
+         success_recheck_count,
+         hang_up_count,
+         single_recheck_count,
+         produce_count,
+         single_produce_count,
+         avg_order_time,
+         avg_collect_time,
+         avg_single_collect_time,
+         avg_success_recheck_time,
+         avg_single_recheck_time,
+         avg_produce_time,
+         avg_single_produce_time,
+         `date`)
+        VALUE
+        (#{finishedOrderCount},
+        #{collectCount},
+        #{singleCollectCount},
+        #{successRecheckCount},
+        #{hangUpCount},
+        #{singleRecheckCount},
+        #{produceCount},
+        #{singleProduceCount},
+        #{avgOrderTime},
+        #{avgCollectTime},
+        #{avgSingleCollectTime},
+        #{avgSuccessRecheckTime},
+        #{avgSingleRecheckTime},
+        #{avgProduceTime},
+        #{avgSingleProduceTime},
+        #{date});
+    </insert>
+
+    <update id="addOrder" >
+        UPDATE IGNORE report
+        SET finished_order_count = finished_order_count + 1,
+        avg_order_time = ((finished_order_count - 1) * avg_order_time + #{sec}) / (finished_order_count)
+        WHERE `date` = curdate();
+    </update>
+
+    <update id="addCollect" >
+        UPDATE IGNORE report
+        SET collect_count = collect_count + 1,
+        avg_collect_time = ((collect_count - 1) * avg_collect_time + #{sec}) / (collect_count)
+        WHERE `date` = curdate();
+    </update>
+
+    <update id="addSingleCollect" >
+        UPDATE IGNORE report
+        SET single_collect_count = single_collect_count + 1,
+        avg_single_collect_time = ((single_collect_count - 1) * avg_single_collect_time + #{sec}) / (single_collect_count)
+        WHERE `date` = curdate();
+    </update>
+
+    <update id="addSuccessRecheck" >
+        UPDATE IGNORE report
+        SET success_recheck_count = success_recheck_count + 1,
+        avg_success_recheck_time = ((success_recheck_count - 1) * avg_success_recheck_time + #{sec}) / (success_recheck_count )
+        WHERE `date` = curdate();
+    </update>
+
+    <update id="addSingleRecheck" >
+        UPDATE IGNORE report
+        SET single_recheck_count = single_recheck_count + 1,
+        avg_single_recheck_time = ((single_recheck_count - 1) * avg_single_recheck_time + #{sec}) / (single_recheck_count )
+        WHERE `date` = curdate();
+    </update>
+
+    <update id="addProduce" >
+        UPDATE IGNORE report
+        SET produce_count = produce_count + 1,
+        avg_produce_time = ((produce_count - 1) * avg_produce_time + #{sec}) / (produce_count)
+        WHERE `date` = curdate();
+    </update>
+
+    <update id="addSingleProduce" >
+        UPDATE IGNORE report
+        SET single_produce_count = single_produce_count + 1,
+        avg_single_produce_time = ((single_produce_count - 1) * avg_single_produce_time + #{sec}) / (single_produce_count)
+        WHERE `date` = curdate();
+    </update>
+
+    <update id="addHangUp" >
+        UPDATE IGNORE report
+        SET hang_up_count = hang_up_count + 1
+        WHERE `date` = curdate();
+    </update>
+
+</mapper>

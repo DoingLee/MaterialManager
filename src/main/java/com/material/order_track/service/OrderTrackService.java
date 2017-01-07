@@ -25,4 +25,10 @@ public class OrderTrackService implements IOrderTrackService {
     public List<OrderTrackMsg> getOrderTrack(int orderId) {
         return orderTrackDao.getOrderTrack(orderId);
     }
+
+    @Override
+    public String getBeginDateTime(String orderId, String actionRegex) {
+        return orderTrackDao.getBeginDateTime(orderId,actionRegex);
+    }
+
 }

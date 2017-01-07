@@ -38,7 +38,7 @@
         <!--MyBatis配置中typeAliasesPackage扫描到的类，会保存其非全限类名 -> 在配置文件中的resultType可以直接写User这种形式-->
         <property name="typeAliasesPackage" value="com.material.user.entity, com.material.qr_code.entity,
          com.material.plan.entity, com.material.order_track.entity, com.material.order.entity,
-         com.material.login.entity,  com.material.inventory.entity "/>
+         com.material.login.entity,  com.material.inventory.entity, com.material.report.entity"/>
         <!-- 配置MyBatis全局配置文件:mybatis-config.xml -->
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <!-- 扫描mybatis的sql映射文件:mapper需要的xml文件 -->

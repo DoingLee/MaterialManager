@@ -31,7 +31,7 @@ public interface IOrderService {
      * @param newStatus 新状态（unsolved solving solved）
      * @return
      */
-    int updateOrderStatus(@Param("orderId")int orderId, @Param("newStatus") String newStatus);
+    int updateOrderStatus(String orderId,  String newStatus);
 
     /**
      *  获取一个未处理的订单

@@ -7,8 +7,8 @@
 
     <!--order是关键字，所以必须加``-->
     <insert id="insertOrder" parameterType="Order">
-        INSERT IGNORE INTO `order` (product_id, `count`, status, client_name, client_tel)
-        SELECT product_id, #{count}, #{status}, #{clientName}, #{clientTel}
+        INSERT IGNORE INTO `order` (order_id, product_id, `count`, status, client_name, client_tel)
+        SELECT UUID(), product_id, #{count}, #{status}, #{clientName}, #{clientTel}
         FROM `product`
         WHERE product_name = #{productName};
     </insert>

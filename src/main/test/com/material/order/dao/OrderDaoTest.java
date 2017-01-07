@@ -28,7 +28,7 @@ public class OrderDaoTest {
 
     @Test
     public void testInsertOrder() throws Exception {
-        Order order = new Order("test0", 222, Constants.ORDER_STATUS_UNSOLVED, "张三", "199200");
+        Order order = new Order("测试产品", 2, Constants.ORDER_STATUS_UNSOLVED, "张三", "199200");
         int r = orderDao.insertOrder(order);
         logger.debug("结果：" + r);
     }
@@ -44,7 +44,7 @@ public class OrderDaoTest {
 
     @Test
     public void testUpdateOrderStatus() throws Exception {
-        int r = orderDao.updateOrderStatus(2, Constants.ORDER_STATUS_COLLECTING);
+        int r = orderDao.updateOrderStatus("2", Constants.ORDER_STATUS_COLLECTING);
         logger.debug("结果：" + r);
     }
 

@@ -6,7 +6,7 @@ import com.sun.istack.internal.Nullable;
  * Created by Doing on 2016/12/18 0018.
  */
 public class OrderTrackMsg {
-    private int orderId;
+    private String orderId;
     private String userName;
     private String action;
     @Nullable private String actionTime;
@@ -14,24 +14,24 @@ public class OrderTrackMsg {
     public OrderTrackMsg() {
     }
 
-    public OrderTrackMsg(int orderId, String userName, String action) {
+    public OrderTrackMsg(String orderId, String userName, String action) {
         this.orderId = orderId;
         this.userName = userName;
         this.action = action;
     }
 
-    public OrderTrackMsg(int orderId, String userName, String action, String actionTime) {
+    public OrderTrackMsg(String orderId, String userName, String action, String actionTime) {
         this.orderId = orderId;
         this.userName = userName;
         this.action = action;
         this.actionTime = actionTime;
     }
 
-    public int getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 

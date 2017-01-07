@@ -26,7 +26,7 @@ public class OrderTrackDaoTest {
 
     @Test
     public void testAddOrderTrack() throws Exception {
-        OrderTrackMsg orderTrackMsg = new OrderTrackMsg(1, "张三", "获取订单");
+        OrderTrackMsg orderTrackMsg = new OrderTrackMsg("1", "张三", "获取订单");
         orderTrackDao.addOrderTrack(orderTrackMsg);
     }
 
@@ -36,5 +36,11 @@ public class OrderTrackDaoTest {
         for (OrderTrackMsg orderTrackMsg : orderTrackMsgs) {
             logger.debug(orderTrackMsg.toString());
         }
+    }
+
+    @Test
+    public void testGetBeginDate() throws Exception {
+        String d = orderTrackDao.getBeginDateTime("5", "^开始取料");
+        logger.debug(d);
     }
 }

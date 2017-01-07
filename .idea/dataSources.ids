@@ -35,26 +35,28 @@
       <index name="material_name_id" unique="true" columns="material_name_id"/>
     </table>
     <table name="order" schema="" catalog="material_manager_db" type="TABLE">
-      <column name="order_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="b3JkZXIgaWQ=" autoIncrement="true"/>
+      <column name="order_id" sqlType="CHAR" precision="36" scale="0" nullable="false" jdbcType="1" remarks="b3JkZXIgaWQ="/>
       <column name="product_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="cHJvZHVjdCBpZA=="/>
       <column name="count" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5Lqn5ZOB5pWw6YeP"/>
       <column name="status" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" def="J3Vuc29sdmVkJw==" remarks="6K6i5Y2V54q25oCB77ya5pyq5aSE55CGdW5zb2x2ZWTjgIHmraPlnKjlpITnkIZzb2x2aW5n44CB5bey57uP5aSE55CGc29sdmVk"/>
       <column name="client_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" remarks="6K6i5Y2V5a6i5oi35ZCN56ew"/>
       <column name="client_tel" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" remarks="6K6i5Y2V5a6i5oi36IGU57O755S16K+d"/>
+      <column name="order_time" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" remarks="5LiL5Y2V5pe26Ze0"/>
       <primary-key name="PRIMARY" columns="order_id"/>
       <foreign-key name="order_ibfk_1" columns="product_id" ref-table="product" ref-schema="" ref-catalog="material_manager_db" ref-columns="product_id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <exported-key name="order_trace_ibfk_1" table="order_trace" schema="" catalog="material_manager_db" columns="order_id"/>
+      <exported-key name="order_trace_ibfk_3" table="order_trace" schema="" catalog="material_manager_db" columns="order_id"/>
       <index name="order_id" unique="true" columns="order_id"/>
+      <index name="order_id_2" unique="true" columns="order_id"/>
     </table>
     <table name="order_trace" schema="" catalog="material_manager_db" type="TABLE">
       <column name="order_trace_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="b3JkZXIgdHJhY2UgaWQ=" autoIncrement="true"/>
-      <column name="order_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="b3JkZXIgaWQ="/>
+      <column name="order_id" sqlType="CHAR" precision="36" scale="0" nullable="false" jdbcType="1" remarks="b3JkZXIgaWQ="/>
       <column name="user_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5pON5L2c5ZGYIHVzZXIgaWQ="/>
       <column name="action" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12" remarks="5pON5L2c5Yqo5L2c"/>
       <column name="action_time" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" remarks="5pON5L2c5pe26Ze0"/>
       <primary-key name="PRIMARY" columns="order_trace_id"/>
-      <foreign-key name="order_trace_ibfk_1" columns="order_id" ref-table="order" ref-schema="" ref-catalog="material_manager_db" ref-columns="order_id" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="order_trace_ibfk_2" columns="user_id" ref-table="user" ref-schema="" ref-catalog="material_manager_db" ref-columns="user_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="order_trace_ibfk_3" columns="order_id" ref-table="order" ref-schema="" ref-catalog="material_manager_db" ref-columns="order_id" update-rule="3" delete-rule="3" deferrability="2"/>
       <index name="order_trace_id" unique="true" columns="order_trace_id"/>
     </table>
     <table name="product" schema="" catalog="material_manager_db" type="TABLE">
@@ -79,6 +81,27 @@
       <foreign-key name="product_process_ibfk_3" columns="blender_name_id" ref-table="blender_name" ref-schema="" ref-catalog="material_manager_db" ref-columns="blender_name_id" update-rule="3" delete-rule="3" deferrability="2"/>
       <index name="product_process_id" unique="true" columns="product_process_id"/>
       <index name="unique_process" unique="true" columns="product_id,process_order"/>
+    </table>
+    <table name="report" schema="" catalog="material_manager_db" type="TABLE">
+      <column name="report_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="cmVwb3J0IGlk" autoIncrement="true"/>
+      <column name="finished_order_count" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5a6M5oiQ6K6i5Y2V5pWw"/>
+      <column name="collect_count" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5a6M5oiQ5Y+W5paZ5Y2V5o2u5pWw"/>
+      <column name="single_collect_count" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5a6M5oiQ5Y2V5Liq5Y+W5paZ5Yqo5L2c5pWw"/>
+      <column name="success_recheck_count" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5a6M5oiQ5aSN5qC45Y2V5o2u5pWw"/>
+      <column name="single_recheck_count" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5a6M5oiQ5Y2V5Liq5aSN5qC45Yqo5L2c5pWw"/>
+      <column name="hang_up_count" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5oyC5Y2V5pWw"/>
+      <column name="produce_count" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5a6M5oiQ5oqV5paZ5Y2V5o2u5pWw"/>
+      <column name="single_produce_count" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5a6M5oiQ5Y2V5Liq5oqV5paZ5Yqo5L2c5pWw"/>
+      <column name="avg_order_time" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5bmz5Z2H5a6M5oiQ6K6i5Y2V5pe26Ze077yI56eS77yJ"/>
+      <column name="avg_collect_time" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5bmz5Z2H5a6M5oiQ6K6i5Y2V5Y+W5paZ5pe26Ze077yI56eS77yJ"/>
+      <column name="avg_single_collect_time" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5bmz5Z2H5a6M5oiQ5Y2V5Liq5Y+W5paZ5Yqo5L2c5pe26Ze077yI56eS77yJ"/>
+      <column name="avg_success_recheck_time" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5bmz5Z2H5a6M5oiQ6K6i5Y2V5oiQ5Yqf5aSN5qC45pe26Ze077yI56eS77yJ"/>
+      <column name="avg_single_recheck_time" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5bmz5Z2H5a6M5oiQ5Y2V5Liq5aSN5qC45Yqo5L2c5pe26Ze077yI56eS77yJ"/>
+      <column name="avg_produce_time" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5bmz5Z2H5a6M5oiQ6K6i5Y2V5oqV5paZ5pe26Ze077yI56eS77yJ"/>
+      <column name="avg_single_produce_time" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="5bmz5Z2H5a6M5oiQ5Y2V5Liq5oqV5paZ5Yqo5L2c5pe26Ze077yI56eS77yJ"/>
+      <column name="date" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91" remarks="5pel5pyf"/>
+      <primary-key name="PRIMARY" columns="report_id"/>
+      <index name="report_id" unique="true" columns="report_id"/>
     </table>
     <table name="user" schema="" catalog="material_manager_db" type="TABLE">
       <column name="user_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" remarks="dXNlciBpZA==" autoIncrement="true"/>

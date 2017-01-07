@@ -63,7 +63,7 @@ public class OrderController {
             method = RequestMethod.PUT,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    Result<String> updateOrderStatus(@PathVariable("orderId") int orderId, @RequestParam("status") String newStatus) {
+    Result<String> updateOrderStatus(@PathVariable("orderId") String orderId, @RequestParam("status") String newStatus) {
         int result = orderService.updateOrderStatus(orderId, newStatus);
         if (result == 1) {
             String s = "更新成功";
