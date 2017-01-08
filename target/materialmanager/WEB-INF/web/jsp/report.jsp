@@ -41,8 +41,8 @@
     <div id="container" >
 
         <div id="search-time">
-            <div class="daterange daterange--double one" style="margin-top: 30px"></div>
-            <div class="margin">
+            <div class="daterange daterange--double one" style="margin-top: 30px ; width: 40%; margin-left:300px "></div>
+            <div style="width: 40%; margin-top: 10px; margin-left:320px">
                 <button type="button" class="btn btn-primary" id="btn_search">查询</button>
             </div>
         </div>

@@ -32,7 +32,7 @@ public class OrderTrackDaoTest {
 
     @Test
     public void testGetOrderTrack() throws Exception {
-        List<OrderTrackMsg> orderTrackMsgs = orderTrackDao.getOrderTrack(1);
+        List<OrderTrackMsg> orderTrackMsgs = orderTrackDao.getOrderTrack("5");
         for (OrderTrackMsg orderTrackMsg : orderTrackMsgs) {
             logger.debug(orderTrackMsg.toString());
         }

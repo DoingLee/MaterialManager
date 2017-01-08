@@ -78,7 +78,7 @@ public class OrderTrackController {
             method = RequestMethod.GET,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    Result<List<OrderTrackMsg>> getOrderTrack(@PathVariable("orderId")int orderId){
+    Result<List<OrderTrackMsg>> getOrderTrack(@PathVariable("orderId")String orderId){
         List<OrderTrackMsg> result = orderTrackService.getOrderTrack(orderId);
         if (result != null){
             return new Result<List<OrderTrackMsg>>(true, result);

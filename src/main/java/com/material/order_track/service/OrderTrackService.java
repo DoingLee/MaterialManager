@@ -22,7 +22,7 @@ public class OrderTrackService implements IOrderTrackService {
     }
 
     @Override
-    public List<OrderTrackMsg> getOrderTrack(int orderId) {
+    public List<OrderTrackMsg> getOrderTrack(String orderId) {
         return orderTrackDao.getOrderTrack(orderId);
     }
 

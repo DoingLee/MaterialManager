@@ -12,7 +12,7 @@ public interface OrderTrackDao {
 
     int addOrderTrack(OrderTrackMsg orderTrackMsg);
 
-    List<OrderTrackMsg> getOrderTrack(int orderId);
+    List<OrderTrackMsg> getOrderTrack(String orderId);
 
     /**
      * 根据开始动作关键词获取 最新的开始动作时间
