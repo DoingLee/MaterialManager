@@ -23,7 +23,7 @@ public class Report {
     private int avgProduceTime;
     private int avgSingleProduceTime;
 
-    @NonNull private String date;
+    @NonNull private String date = "";
 
     public Report() {
     }

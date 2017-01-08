@@ -19,6 +19,14 @@ public interface ReportDao {
     List<Report> getReport(@Param("fromDate")String fromDate, @Param("toDate")String toDate);
 
     /**
+     * 获取从fromDate到toDate的所有报告汇总信息
+     * @param fromDate 开始时期（包含）
+     * @param toDate 结束日期（包含）
+     * @return
+     */
+    Report getSumReport(@Param("fromDate")String fromDate, @Param("toDate")String toDate);
+
+    /**
      * 插入新行
      * @param report
      * @return

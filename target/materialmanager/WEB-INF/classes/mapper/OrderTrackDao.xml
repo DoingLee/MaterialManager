@@ -19,4 +19,13 @@
         AND order_trace.order_id = #{orderId};
     </select>
 
+    <select id="getBeginDateTime" resultType="String">
+        SELECT date_format(`action_time`, '%Y-%m-%d %h:%i:%s')
+        FROM order_trace
+        WHERE `action` REGEXP #{actionRegex}
+        AND order_id = #{orderId}
+        ORDER BY action_time DESC
+        LIMIT 1;
+    </select>
+
 </mapper>

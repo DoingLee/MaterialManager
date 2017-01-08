@@ -16,4 +16,10 @@ public class OrderPageController {
     String checkOrderPage() {
         return "order_check";
     }
+
+    @RequestMapping(value = "/page/check/manager/",
+            method = RequestMethod.GET)
+    String checkOrderPageForManager() {
+        return "order_check_for_manager";
+    }
 }

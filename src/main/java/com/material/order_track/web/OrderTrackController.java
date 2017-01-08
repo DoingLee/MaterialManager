@@ -90,32 +90,51 @@ public class OrderTrackController {
     //记录
     private void handleReport(String orderId, String action) throws ParseException {
 
-        //计算间隔时间
         String actionType = action.substring(0, 4); //前四个文字
-        String beginDateTimeString = orderTrackService.getBeginDateTime(orderId, "^" + actionType); //开始时间
-        String endDateTimeString = getCurrentTime(); //结束时间
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Date beginDateTime = sdf.parse(beginDateTimeString);
-        Date endDateTime = sdf.parse(endDateTimeString);
-        long sec = ( endDateTime.getTime() - beginDateTime.getTime() ) / 1000; //间隔时间（秒）
 
         if (actionType.equals("完成订单")) {
-            reportService.addOrder((int)sec);
+            String beginActionRegex = "开始订单";
+            int sec = calculateTime(orderId, beginActionRegex);
+            reportService.addOrder((int) sec);
         }else if (actionType.equals("完成取料")) {
+            String beginActionRegex = "开始取料";
+            int sec = calculateTime(orderId, beginActionRegex);
             reportService.addCollect((int) sec);
         }else if (actionType.equals("取料完成")) {
+            String beginActionRegex = "取料开始";
+            int sec = calculateTime(orderId, beginActionRegex);
             reportService.addSingleCollect((int) sec);
         }else if (actionType.equals("完成复核")) {
+            String beginActionRegex = "开始复核";
+            int sec = calculateTime(orderId, beginActionRegex);
             reportService.addSuccessRecheck((int) sec);
         }else if (actionType.equals("复核完成")) {
+            String beginActionRegex = "复核开始";
+            int sec = calculateTime(orderId, beginActionRegex);
             reportService.addSingleRecheck((int) sec);
         }else if (actionType.equals("完成投料")) {
+            String beginActionRegex = "开始投料";
+            int sec = calculateTime(orderId, beginActionRegex);
             reportService.addProduce((int) sec);
         }else if (actionType.equals("投料完成")) {
+            String beginActionRegex = "投料开始";
+            int sec = calculateTime(orderId, beginActionRegex);
             reportService.addSingleProduce((int) sec);
         }else if (actionType.equals("复核挂单")) {
             reportService.addHangUp();
         }
+    }
+
+    //计算间隔时间
+    private int calculateTime(String orderId, String beginActionRegex) throws ParseException {
+        String beginDateTimeString = orderTrackService.getBeginDateTime(orderId, "^" + beginActionRegex); //开始时间
+        String endDateTimeString = getCurrentTime(); //结束时间
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date beginDateTime = sdf.parse(beginDateTimeString);
+        Date endDateTime = sdf.parse(endDateTimeString);
+        long sec = ( endDateTime.getTime() - beginDateTime.getTime() ) / 1000; //间隔时间（秒）
+        return (int)sec;
     }
 
     private String getCurrentTime() {

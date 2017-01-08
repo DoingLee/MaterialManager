@@ -27,36 +27,40 @@
             <li role="presentation" class="active"><a href="#">所有用户</a></li>
             <li role="presentation"><a href="/user/page/add/">添加用户</a></li>
             <li role="presentation"><a href="/order_track/page/manager/">配料流水</a></li>
+            <li role="presentation" ><a href="/order/page/check/manager/">查看订单</a></li>
+            <li role="presentation"><a href="/report/page/check/">统计报表</a></li>
         </ul>
     </div>
 
-    <div>
-        <table class="table" >
-            <caption>用户信息</caption>
-            <thead>
-            <tr>
-                <th>账号</th>
-                <th>姓名</th>
-                <th>权限</th>
-                <th>操作</th>
-            </tr>
-            </thead>
-            <tbody id="table-body">
-            <%--待查询插入--%>
-            </tbody>
+    <div id="container">
+        <div>
+            <table class="table" >
+                <caption>用户信息</caption>
+                <thead>
+                <tr>
+                    <th>账号</th>
+                    <th>姓名</th>
+                    <th>权限</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="table-body">
+                <%--待查询插入--%>
+                </tbody>
 
-            <%--<tbody>--%>
-            <%--<tr>--%>
+                <%--<tbody>--%>
+                <%--<tr>--%>
                 <%--<td>00000</td>--%>
                 <%--<td>测试者</td>--%>
                 <%--<td>无</td>--%>
                 <%--<td>--%>
-                    <%--<button type="button" class="btn btn-danger">删除</button>--%>
+                <%--<button type="button" class="btn btn-danger">删除</button>--%>
                 <%--</td>--%>
-            <%--</tr>--%>
-            <%--</tbody>--%>
+                <%--</tr>--%>
+                <%--</tbody>--%>
 
-        </table>
+            </table>
+        </div>
     </div>
 </div>
 

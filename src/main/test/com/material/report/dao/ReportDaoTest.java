@@ -40,6 +40,14 @@ public class ReportDaoTest {
     }
 
     @Test
+    public void testGetSumReport() throws Exception {
+        Report report = reportDao.getSumReport("1980-01-02", "2021-01-01");
+        if (report != null) {
+            logger.info(report.toString());
+        }
+    }
+
+    @Test
     public void testInsertRow() throws Exception {
         reportDao.insertRow(new Report("2017-01-07"));
     }

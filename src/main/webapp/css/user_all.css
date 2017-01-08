@@ -5,3 +5,8 @@
     padding-top: 30px;
     padding-bottom: 60px;
 }
+
+#container{
+    width: 80%;
+    margin: 0 auto;
+}

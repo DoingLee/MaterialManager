@@ -27,6 +27,11 @@ public class ReportService implements IReportService {
     }
 
     @Override
+    public Report getSumReport(String fromDate, String toDate) {
+        return reportDao.getSumReport(fromDate, toDate);
+    }
+
+    @Override
     public int addOrder(int sec) {
         int result = reportDao.addOrder(sec);
         if (result == 0) {

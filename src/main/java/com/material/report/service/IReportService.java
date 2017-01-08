@@ -11,11 +11,19 @@ import java.util.List;
 public interface IReportService {
     /**
      * 获取从fromDate到toDate的所有报告信息
-     * @param fromDate 开始时期（包含）
-     * @param toDate 结束日期（包含）
+     * @param fromDate 开始时期（包含）yyyy-MM-dd格式
+     * @param toDate 结束日期（包含）yyyy-MM-dd格式
      * @return
      */
     List<Report> getReport(String fromDate, String toDate);
+
+    /**
+     * 获取从fromDate到toDate的所有报告的汇总统计信息
+     * @param fromDate 开始时期（包含）yyyy-MM-dd格式
+     * @param toDate 结束日期（包含）yyyy-MM-dd格式
+     * @return
+     */
+    Report getSumReport(String fromDate, String toDate);
 
     /**
      *  更新 完成订单数 和 平均完成订单时间（秒）

@@ -28,6 +28,8 @@
       <li role="presentation"><a href="/user/page/all/">所有用户</a></li>
       <li role="presentation"><a href="/user/page/add/">添加用户</a></li>
       <li role="presentation"class="active"><a href="">配料流水</a></li>
+        <li role="presentation" ><a href="/order/page/check/manager/">查看订单</a></li>
+        <li role="presentation"><a href="/report/page/check/">统计报表</a></li>
     </ul>
   </div>
 
