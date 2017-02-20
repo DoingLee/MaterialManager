@@ -160,6 +160,14 @@
             <version>3.2</version>
         </dependency>
 
+        <!--json-->
+        <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20160212</version>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>materialmanager</finalName>

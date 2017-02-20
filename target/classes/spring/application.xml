@@ -11,4 +11,6 @@
     <import resource="classpath:/spring/spring-service.xml" />
     <import resource="classpath:/spring/spring-web.xml" />
 
+    <bean class="com.material.weight.WeightController" ></bean>
+
 </beans>

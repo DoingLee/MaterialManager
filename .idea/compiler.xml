@@ -24,8 +24,16 @@
         <processorPath useClasspath="true" />
         <module name="MavenDemo" />
       </profile>
+      <profile default="false" name="Annotation profile for MaterialManager" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="MaterialManager" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="MaterialManager" target="1.6" />
       <module name="MavenDemo" target="1.6" />
     </bytecodeTargetLevel>
   </component>
