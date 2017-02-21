@@ -40,15 +40,9 @@ public class LoginController {
                          HttpServletResponse httpServletResponse,
                          HttpServletRequest request) throws IOException {
 
-        System.out.print("=============== test!");
-        logger.debug("=============== test debug!");
-        logger.info("=============== test info!");
-        logger.error("=============== test error!");
-
-
         LoginMsgDto loginMsgDto = loginService.checkPassword(accountId, password);
         if (loginMsgDto == null) {
-            return new Result<String>(false, "密码错误？？？？？！");
+            return new Result<String>(false, "密码错误！");
         }
         if (!userType.equals(loginMsgDto.getUserType())) {
             return new Result<String>(false, "用户权限错误！");
